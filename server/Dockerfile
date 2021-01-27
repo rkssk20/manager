@@ -8,6 +8,6 @@ RUN npm install
 
 COPY . .
 
-EXPOSE 3010
+EXPOSE 3100
 
 CMD ["npm", "run", "start-watch"]
