@@ -1,19 +1,13 @@
-.navbar{
-  width: 100%;
-  height: 100px;
+@charset "utf-8";
+
+html {
+  font-size: 10px;
+  font-family: HGP創英角ﾎﾟｯﾌﾟ体, sans-serif;
+  text-align: center;
   background-color: #eeeeee;
-  position: fixed;
-  bottom: 0;
-  display: flex;
 }
 
-.navbar-icon{
-  width: 300px;
-  margin: auto;
-  display: flex;
-  justify-content: space-between;
-}
-
-.icon{
-  width: 50px;
+.wrap{
+  width: 100%;
+  height: 100%;
 }

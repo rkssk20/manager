@@ -1,11 +1,21 @@
 import React from 'react';
 
-class Home extends React.Component {
-  render(){
-    return(
-      <p>aaa</p>
-    );
+function Home (){
+
+  const a = [];
+
+  function bbb () {
+    console.log(a)
   }
+
+  function ccc (){
+    a.push(...a, {title: 'iii', image: 'jjj'});
+  }
+
+  return( 
+    <>
+    </>
+  );
 }
 
 export default Home;
