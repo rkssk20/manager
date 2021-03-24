@@ -1,0 +1,128 @@
+/* https://haniwaman.com/ */
+.my-parts-hidden {
+  display: none;
+}
+
+#my-parts-icon {
+  cursor: pointer;
+  display: inline-block;
+  height: 40px;
+  position: relative;
+  width: 40px;
+  z-index: 4;
+}
+
+#my-parts-icon span {
+  background:  rgb(70, 70, 70);
+  border-radius: 4px;
+  display: block;
+  height: 13%;
+  left: 50%;
+  margin: -8% 0 0 -42%;
+  position: absolute;
+  top: 50%;
+  transition: all 0.3s ease-in-out;
+  width: 84%;
+}
+
+#my-parts-icon span::before,
+#my-parts-icon span::after {
+  -webkit-transform: rotate(0);
+  background: rgb(70, 70, 70);
+  border-radius: 4px;
+  content: "";
+  display: block;
+  height: 100%;
+  left: 50%;
+  margin: -8% 0 0 -50%;
+  position: absolute;
+  top: 50%;
+  transform: rotate(0);
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+}
+
+#my-parts-icon span::before {
+  margin-top: -38%;
+}
+
+#my-parts-icon span::after {
+  margin-top: 19%;
+}
+
+#my-parts-checkbox:checked ~ #my-parts-icon span {
+  background: rgba(51, 51, 51, 0);
+}
+
+#my-parts-checkbox:checked ~ #my-parts-icon span::before,
+#my-parts-checkbox:checked ~ #my-parts-icon span::after {
+  content: "";
+  display: block;
+  height: 100%;
+  left: 50%;
+  margin: -8% 0 0 -42%;
+  position: absolute;
+  top: 50%;
+  width: 100%;
+}
+
+#my-parts-checkbox:checked ~ #my-parts-icon span::before {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+#my-parts-checkbox:checked ~ #my-parts-icon span::after {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+
+
+/* Setting.js */
+.set-back{
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  animation-name: back;
+  animation-duration: 1s;
+}
+
+@keyframes back{
+  0%{
+    opacity: 0;
+  }50%{
+    opacity: 0;
+  }100%{
+    opacity: 1;
+  }
+}
+
+.set-box{
+  height: 240px;
+  width: calc(80% - 60px);
+  padding: 30px 30px;
+  margin: calc(((100vh - 300px - 60px - 40px) / 2) + 40px) auto 0;
+  background-color: #f5e4e7;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  animation-name: set;
+  animation-duration: 1.5s;
+}
+
+@keyframes set {
+  0%{
+    transform: translateY(-20px);
+  }100%{
+    transform: translateY(0);
+  }
+}
+
+@media screen and (max-height: 420px){
+  .set-box{
+    margin: 50px auto 70px;
+  }
+}

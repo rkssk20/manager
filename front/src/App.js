@@ -1,25 +1,54 @@
-import { BrowserRouter, Route } from 'react-router-dom';
+import React, { useState, createContext } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import './App.css';
-import './css/Review.css';
 import Navbar from './pages/Navbar';
-import Home from './pages/Home';
-import Review from './pages/Review';
-import Account from './pages/Account';
+import Timeline from './pages/Timeline';
+import Search from './pages/Search/Search';
+import Ranking from './pages/Ranking/Ranking';
+import ReviewPage from './pages/Review/ReviewPage';
+import AccountPage from './pages/Account/AccountPage';
+import Data from './components/User/Data';
+import Login from './pages/User/Login';
+import './App.css';
+import './css/Loading.css'
 
-function App() {
-  return (
-    <div className="wrapper">
-      {/* BrowserRouterの中でreact-routerを使用 */}
-      <BrowserRouter>
-        {/* Navbar(下のメニュー)を表示しつつ、
-        Routeのpathによって表示するページを指定しておく */}
+export const UserContext = createContext();
+
+function App(){
+  const [userData, setUserData] = useState({loading: true, error: false});
+
+  Data(setUserData);
+
+  console.log(userData)
+
+  function PrivateRoute(props){
+    return(
+      <>
+        {
+          // loading: true(処理中)はローディング画面
+          userData.loading ? <div className="loader" /> :
+          // データがあれば目的のページを表示
+          userData.result ? <Route component={props.component} /> :
+          // エラーは再読み込み、エラーでなければログインを勧める
+          setUserData.error ? "" : <Login path={ props.path } />
+        }
+      </>
+    )
+  }
+
+  return(
+    <BrowserRouter>
+      <UserContext.Provider value={ userData.result }>
         <Navbar />
-        <Route exact path="/" component={ Home } />
-        <Route path="/review" component={ Review } />
-        <Route path="/account" component={ Account } />
-      </BrowserRouter>
-    </div>
+        <Switch>
+          <PrivateRoute path="/timeline" component={ Timeline } />
+          <Route path="/search" component={ Search } />
+          <Route exact path="/" component={ Ranking } />
+          <Route path="/review" component={ ReviewPage } />
+          <PrivateRoute path="/account" component={ AccountPage } />
+        </Switch>
+      </UserContext.Provider>
+    </BrowserRouter>
   );
 }
 
