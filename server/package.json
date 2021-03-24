@@ -7,6 +7,7 @@
     "start-watch": "nodemon ./bin/www"
   },
   "dependencies": {
+    "aws-sdk": "^2.863.0",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
@@ -14,6 +15,8 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
+    "multer": "^1.4.2",
+    "multer-s3": "^2.9.0",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.7"
   }

@@ -2,6 +2,11 @@ version: '3'
 services:
   db:
     image: mysql:5.7
+    # 日本語化
+    command:
+      - mysqld
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
     volumes:
       - db:/var/lib/mysql
     hostname: $MYSQL_HOST
