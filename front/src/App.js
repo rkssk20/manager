@@ -1,55 +1,96 @@
-import React, { useState, createContext } from 'react';
+import React, { createContext } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-
-import Navbar from './pages/Navbar';
-import Timeline from './pages/Timeline';
-import Search from './pages/Search/Search';
-import Ranking from './pages/Ranking/Ranking';
-import ReviewPage from './pages/Review/ReviewPage';
-import AccountPage from './pages/Account/AccountPage';
-import Data from './components/User/Data';
-import Login from './pages/User/Login';
+import useLogin from './hooks/useLogin';
+import Navbar from './views/Navbar';
+import TimelinePage from './views/TimelinePage';
+import SearchPage from './views/Search/SearchPage';
+import RankingPage from './views/Ranking/RankingPage';
+import ReviewPage from './views/Review/ReviewPage';
+import AccountPage from './views/Account/AccountPage';
+import Setting from './views/Setting';
+import WorkPage from './views/Work/WorkPage';
+import NotFound from './views/NotFound';
+import Login from './components/Login';
 import './App.css';
-import './css/Loading.css'
 
-export const UserContext = createContext();
+import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
+import { ThemeProvider } from '@material-ui/core/styles';
+import CircleProgress from '@material-ui/core/CircularProgress';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#b71c1c',
+      light: '#f05545',
+      dark: '#7f0000',
+    },
+    secondary: {
+      main: '#efebe9',
+      light: '#ffffff',
+      dark: '#bdb9b7',
+    },
+  },
+  typography: {
+    fontFamily: [
+      '-apple-system', 
+      'BlinkMacSystemFont', 
+      '"Helvetica Neue"', 
+      'YuGothic', 
+      '"ヒラギノ角ゴ ProN W3"', 
+      'Hiragino Kaku Gothic ProN', 
+      'Arial', 
+      '"メイリオ"', 
+      'Meiryo', 
+      'sans-serif'
+    ].join(','),
+  },
+  props: {
+    MuiButtonBase: {
+      // ボタンクリック時のrippleアニメーションをオフ
+      disableRipple: true,
+    },
+  },
+});
 
 function App(){
-  const [userData, setUserData] = useState({loading: true, error: false});
+  const userData = useLogin();
 
-  Data(setUserData);
-
-  console.log(userData)
-
+  // ログインしていなければ案内するページ
   function PrivateRoute(props){
     return(
-      <>
-        {
-          // loading: true(処理中)はローディング画面
-          userData.loading ? <div className="loader" /> :
-          // データがあれば目的のページを表示
-          userData.result ? <Route component={props.component} /> :
-          // エラーは再読み込み、エラーでなければログインを勧める
-          setUserData.error ? "" : <Login path={ props.path } />
-        }
-      </>
-    )
-  }
+      (userData !== 'empty') ?
+      <Route path={ props.path } component={ props.component } /> :
+      <Login />
+    );
+  };
 
   return(
     <BrowserRouter>
-      <UserContext.Provider value={ userData.result }>
-        <Navbar />
-        <Switch>
-          <PrivateRoute path="/timeline" component={ Timeline } />
-          <Route path="/search" component={ Search } />
-          <Route exact path="/" component={ Ranking } />
-          <Route path="/review" component={ ReviewPage } />
-          <PrivateRoute path="/account" component={ AccountPage } />
-        </Switch>
-      </UserContext.Provider>
+      <ThemeProvider theme={ theme }>
+        <UserContext.Provider value={ userData }>
+          <div style={{ maxWidth: 678, margin: 'auto' }} >
+            <Navbar />
+            {
+              (userData === 'loading') ? <CircleProgress /> :
+              <Switch>
+                <PrivateRoute path="/timeline" component={ TimelinePage } />
+                <Route path="/search" component={ SearchPage } />
+                <Route exact path="/" component={ RankingPage } />
+                <Route path="/review" component={ ReviewPage } />
+                <PrivateRoute path="/account/:id" component={ AccountPage } />
+                { (userData === 'empty') && <PrivateRoute exact path="/account" /> }
+                <PrivateRoute path="/setting" component={ Setting } />
+                <Route path="/work/:work" component={ WorkPage } />
+                <Route component={ NotFound } />
+              </Switch>
+            }
+          </div>
+        </UserContext.Provider>
+      </ThemeProvider>
     </BrowserRouter>
   );
-}
+};
+
+export const UserContext = createContext();
 
 export default App;

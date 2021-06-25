@@ -2,13 +2,21 @@
 
 html{
   font-size: 10px;
-  font-family: HGP創英角ﾎﾟｯﾌﾟ体, sans-serif;
   text-align: center;
   background-color: #fff;
-  --themacolor: #940a17;
 }
 
 *{
-  /* 画面上部の謎の空白を消すため */
+  /* 画面上部の空白を消すため */
   margin: 0;
+}
+
+/* ヘッダーとフッター分の空白 */
+#root{
+  padding-top: 50px;
+  padding-bottom: 60px;
+}
+
+img {
+  pointer-events: none;
 }

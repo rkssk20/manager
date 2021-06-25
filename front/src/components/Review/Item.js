@@ -1,60 +1,102 @@
-import { useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { UserContext } from '../../App';
+import Login from '../Login';
 
-import nomovie from '../../images/movieB.png';
-import nomusic from '../../images/musicB.png';
-import nobook from '../../images/bookB.png';
-import noanime from '../../images/animeB.png';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Typography from '@material-ui/core/Typography';
+import MovieIcon from '@material-ui/icons/Movie';
 
-import { GenruContext } from '../../pages/Review/Search';
+const list = {
+  width: '100%',
+  padding: 5,
+  borderRadius: 10
+};
+const box = {
+  width: 130,
+  height: 100,
+  display: 'flex',
+  justifyContent: 'center'
+};
+const image = {
+  maxWidth: 130,
+  maxHeight: 100,
+  borderRadius: 5
+};
+const text = {
+  width: 'calc(100% - 130px)',
+  height: 100,
+  paddingRight: 10,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  textAlign: 'center'
+};
+const title = {
+  display: '-webkit-box',
+  WebkitLineClamp: 2,
+  WebkitBoxOrient: 'vertical',
+  overflow: 'hidden',
+  /*IE*/
+  maxHeight: '40',
+};
+const date = {
+  color: '#757575'
+};
 
-function View(props) {
+function Item(props) {
   const history = useHistory();
-
-  const searchGenru = useContext(GenruContext);
-
-  // Annict or iTunes
-  if(props.item.trackName){
-    var img = props.item.artworkUrl100;
-    var title = props.item.trackName;
-    var name = props.item.artistName;
-    var date = props.item.releaseDate.slice(0, 10);
-  }else{
-    var img = props.item.images.recommended_url;
-    var title = props.item.title;
-    var name = props.item.media_text;
-    var date = props.item.season_name_text;
-  }
-
-  // 画像がない時の処理
-  if(img == ''){
-    if(searchGenru === '映画'){
-      var img = nomovie;
-    }else if(searchGenru === '音楽'){
-      var img = nomusic;
-    }else if(searchGenru === '本'){
-      var img = nobook;
-    }else{
-      var img = noanime;
-    }
-  }
+  const userData = useContext(UserContext);
+  const [loginPopup, setLoginPopup] = useState(false);
 
   function reviewWrite(){
-    history.push('/review/write', {title: title, name: name, genru: searchGenru, img: img})
-  }
+    if(props.search){
+      const work = props.item.id + '-' + props.searchGenru;
+      history.push('/work/' + work);
+
+    }else if(userData === 'empty'){
+      setLoginPopup(true);
+      
+    }else{
+      history.push('/review/write', {
+        genru: props.searchGenru,
+        image: props.item.image,
+        title: props.item.title,
+        name: props.item.name,
+        date: props.item.date,
+        id: props.item.id
+      });
+    }
+  };
 
   return(
-    <li className="list-item" onClick={ reviewWrite } >
-      <img className="list-img" src={ img } />
-      <div className="list-box">
-        <p className="list-title">{ title }</p>
-        <div className="list-detail">
-          <p>{ date }</p>
-          <p>{ name }</p>
+    <>
+      <ListItem style={ list } button onClick={ reviewWrite }>
+        <div style={ box }>
+          {
+            props.item.image ?
+            <img
+              style={ image }
+              src={ props.item.image }
+              alt="作品"
+            /> :
+            <MovieIcon
+              style={{ fontSize: 100 }}
+            />
+          }
         </div>
-      </div>
-    </li>
+        
+        <ListItemText style={ text }>
+          <Typography style={ title } variant="h5" gutterBottom>{ props.item.title }</Typography>
+          <Typography variant="h5">{ props.item.name }</Typography>
+          <Typography style={ date } variant="h6">{ props.item.date }</Typography>
+        </ListItemText>
+      </ListItem>
+
+      { loginPopup && <Login /> }
+    </>
   )
 }
 
-export default View;
+export default Item;
