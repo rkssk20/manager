@@ -1,0 +1,5 @@
+node_modules
+Dockerfile
+serverless.yml
+.serverless
+lambda.js

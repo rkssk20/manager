@@ -10,4 +10,7 @@ COPY . .
 
 EXPOSE 3100
 
-CMD ["npm", "run", "start-watch"]
+# 開発環境
+# CMD ["npm", "run", "start-watch"]
+# 本番環境
+CMD ["npm", "start"]

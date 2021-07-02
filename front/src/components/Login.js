@@ -62,7 +62,10 @@ function Login(){
     };
 
     loginWithRedirect({
-      redirectUri: `http://localhost:3000${ path }`
+      // 開発環境
+      // redirectUri: `http://localhost:3000${ path }`
+      // 本番環境
+      redirectUri: `https://www.audience.cf${ path }`
     });
   };
 

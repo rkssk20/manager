@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var AWS = require('aws-sdk');
 
-const AWS_BUCKET = process.env.AWS_BUCKET;
+const BUCKET = process.env.BUCKET;
 const s3 = new AWS.S3({'region':'ap-northeast-1'});
 // ユーザー設定におけるS3の画像の削除
 
@@ -13,7 +13,7 @@ router.post('/', function(req, res){
 
   // ①Auth0に設定してある画像のURLからKeyを作成し、S3の画像がアップロードされてから何ミリ秒経過したか取得
   s3.getObject({
-    Bucket: AWS_BUCKET,
+    Bucket: BUCKET,
     Key: icon
   }, function(err, data) {
     if (err) {
@@ -28,7 +28,7 @@ router.post('/', function(req, res){
       // ②30日以上経過していたらその画像を削除
       if(resultTime > 2592000000){
         s3.deleteObject({
-          Bucket: AWS_BUCKET,
+          Bucket: BUCKET,
           Key: icon
         })
         .promise()
