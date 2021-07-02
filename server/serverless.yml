@@ -1,0 +1,42 @@
+service: server
+
+plugins:
+  - serverless-dotenv-plugin
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: ap-northeast-1
+  environment:
+    MYSQL_HOST: ${env::MYSQL_HOST}
+    MYSQL_DATABASE: ${env::MYSQL_DATABASE}
+    MYSQL_USER: ${env::MYSQL_USER}
+    MYSQL_PASSWORD: ${env::MYSQL_PASSWORD}
+    ACCESS_KEY_ID: ${env::ACCESS_KEY_ID}
+    SECRET_ACCESS_KEY: ${env::SECRET_ACCESS_KEY}
+    BUCKET: ${env::BUCKET}
+    CLIENT_ID: ${env::CLIENT_ID}
+    CLIENT_SECRET: ${env::CLIENT_SECRET}
+  deploymentBucket:
+    blockPublicAccess: true
+  # endpointType: private
+  # resourcePolicy:
+  #  - Effect: Allow
+  #    Action: '*'
+  #    Resource: '*'
+  #    Principal: '*'
+
+package:
+  exclude:
+    - .git/**
+    - test/**
+    - README.md
+    - Dockerfile
+
+functions:
+  exampleFunction:
+    name: audience_server
+    handler: lambda.handler
+    events:
+      - http: ANY /
+      - http: 'ANY {proxy+}'

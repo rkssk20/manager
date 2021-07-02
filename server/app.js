@@ -21,7 +21,7 @@ var likeRouter = require('./routes/like');
 var unLikeRouter = require('./routes/unLike');
 var settingRouter = require('./routes/setting');
 var deleteRouter = require('./routes/delete');
-var iconRouter = require('./routes/icon');
+// var iconRouter = require('./routes/icon');
 var favoritesRouter = require('./routes/favorites');
 var workRouter = require('./routes/work');
 var workRankingRouter = require('./routes/workRanking');
@@ -57,7 +57,7 @@ app.use('/workPosts', workPostsRouter);
 app.use('/favorites', favoritesRouter);
 app.use('/setting', settingRouter);
 app.use('/delete', deleteRouter);
-app.use('/icon', iconRouter);
+// app.use('/icon', iconRouter);
 app.use('/work', workRouter);
 app.use('/workRanking', workRankingRouter);
 app.use('/likeRanking', likeRankingRouter);
@@ -75,6 +75,18 @@ var pool = mysql.createPool({
 });
 
 global.pool = pool;
+
+app.get('/', (req, res) => {
+  // res.send(pool.query('SELECT title from works', function(err, result){
+  //   if(err){
+  //     res.send(err + 'error');
+  //     return
+  //   }
+    
+  //   res.send(result + 'success');
+  // }));
+  res.send(process.env.MYSQL_DATABASE);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

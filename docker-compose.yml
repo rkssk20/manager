@@ -1,5 +1,6 @@
 version: '3'
 services:
+  # 開発環境DB
   # db:
   #   image: mysql:5.7
   #   # 日本語化
@@ -17,17 +18,26 @@ services:
 
   app:
     build: ./front
-    env_file: .env
+    env_file: ./front/.env
     volumes:
-      - ./front:/app/front
+      - ./front/build:/app/front/build
+      - ./front/public:/app/front/public
+      - ./front/src:/app/front/src
+      - ./front/package-lock.json:/app/front/package-lock.json
+      - ./front/package.json:/app/front/package.json
     ports:
       - '3000:3000'
 
   server:
     build: ./server
-    env_file: .env
+    env_file: ./server/.env
     volumes:
-      - ./server:/app/server
+      - ./server/bin:/app/server/bin
+      - ./server/routes:/app/server/routes
+      - ./server/views:/app/server/views
+      - ./server/app.js:/app/server/app.js
+      - ./server/package-lock.json:/app/server/package-lock.json
+      - ./server/package.json:/app/server/package.json
     ports:
       - '3100:3100'
 

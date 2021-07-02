@@ -8,12 +8,12 @@ const MYSQL_PASSWORD = process.env['MYSQL_PASSWORD'];
 const MYSQL_DATABASE = process.env['MYSQL_DATABASE'];
 
 // フォローを外す
-var connection = mysql.createConnection({
-  host: MYSQL_HOST,
-  user: MYSQL_USER,
-  password: MYSQL_PASSWORD,
-  database: MYSQL_DATABASE
-});
+// var connection = mysql.createConnection({
+//   host: MYSQL_HOST,
+//   user: MYSQL_USER,
+//   password: MYSQL_PASSWORD,
+//   database: MYSQL_DATABASE
+// });
 
 router.post('/', function(req, res){
   const follow = {
