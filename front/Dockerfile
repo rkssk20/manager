@@ -1,4 +1,4 @@
-FROM node:14.15.4-alpine3.12
+FROM node:14.17.0-stretch-slim
 # appの中にfrontを作りそこで作業する
 WORKDIR /app/front
 # 設定ファイルを先にCOPY

@@ -20,7 +20,6 @@ services:
     build: ./front
     env_file: ./front/.env
     volumes:
-      - ./front/build:/app/front/build
       - ./front/public:/app/front/public
       - ./front/src:/app/front/src
       - ./front/package-lock.json:/app/front/package-lock.json
