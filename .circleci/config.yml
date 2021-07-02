@@ -1,17 +1,19 @@
 version: 2.1
+
 jobs:
   build:
     docker:
       - image: circleci/node:14.17.0
     steps:
       - checkout
-      - run: mkdir bucket && cd bucket/ && git clone https://github.com/rkssk20/audience.git && cd audience/front/ && npm install && npm run build && ls .
-      
+      - run: git clone https://github.com/rkssk20/audience.git && cd audience/front/ && npm install && npm run build .
+
       - aws-s3/sync:
           aws-access-key-id: AWS_ACCESS_KEY_ID
           aws-region: AWS_REGION
           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-          from: bucket
+          from: audience/front/build
           to: s3://app-audience
+
 orbs:
-  aws-s3: circleci/aws-s3@2.0.0    
+  aws-s3: circleci/aws-s3@2.0.0
