@@ -5,7 +5,7 @@ jobs:
       - image: cimg/python:3.6
     steps:
       - checkout
-      - run: mkdir bucket && cd bucket/ && git clone https://github.com/rkssk20/audience.git && cd front && npm run build .
+      - run: mkdir bucket && cd bucket/ && git clone https://github.com/rkssk20/audience.git && ls && cd front/ && npm run build .
       
       - aws-s3/sync:
           arguments: |
