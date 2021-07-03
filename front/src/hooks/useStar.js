@@ -8,7 +8,9 @@ function useStar(work_id, genru){
 
     const data = {work_id: work_id, genru: genru};
 
-    fetch('http://localhost:3100/average', {
+    const REACT_API = process.env.REACT_API;
+
+    fetch(`${ REACT_API }/average`, {
       method: 'POST',
       body: JSON.stringify(data),
       headers : new Headers({ "Content-type" : "application/json" })

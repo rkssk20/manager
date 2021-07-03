@@ -11,8 +11,10 @@ function useWorkPost(work_id, genru, page){
     if(!work_id || !genru) return;
     
     const data = {user_id: userData.user_id, work_id: work_id, genru: genru, page: page};
+
+    const REACT_API = process.env.REACT_API;
     
-    fetch('http://localhost:3100/workPosts', {
+    fetch(`${ REACT_API }/workPosts`, {
       method: 'POST',
       body: JSON.stringify(data),
       headers : new Headers({ "Content-type" : "application/json" })

@@ -10,9 +10,11 @@ function useLike(accountData, page){
   useEffect(() => {
     if(!accountData) return;
 
+    const REACT_API = process.env.REACT_API;
+
     const data = {user_id: userData.user_id, account_id: accountData.user_id, page: page};
       
-    fetch('http://localhost:3100/favorites', {
+    fetch(`${ REACT_API }/favorites`, {
       method: 'POST',
       body: JSON.stringify(data),
       headers : new Headers({ "Content-type" : "application/json" })

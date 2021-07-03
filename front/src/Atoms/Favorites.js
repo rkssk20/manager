@@ -37,6 +37,8 @@ function Favorites(props){
   function onFavorite(e){
     e.stopPropagation();
 
+    const REACT_API = process.env.REACT_API;
+
     if(userData === 'empty'){
       setLoginPopup(true);
       
@@ -53,7 +55,7 @@ function Favorites(props){
         // いいねを外した時
         setFavoriteCount(favoriteCount - 1);
 
-        fetch('http://localhost:3100/unLike', {
+        fetch(`${ REACT_API }/unLike`, {
           method: 'POST',
           body: JSON.stringify(data),
           headers : new Headers({ "Content-type" : "application/json" })
@@ -67,7 +69,7 @@ function Favorites(props){
         // いいねした時
         setFavoriteCount(favoriteCount + 1);
 
-        fetch('http://localhost:3100/like', {
+        fetch(`${ REACT_API }/like`, {
           method: 'POST',
           body: JSON.stringify(data),
           headers : new Headers({ "Content-type" : "application/json" })

@@ -8,9 +8,11 @@ function useAccount(searchSubmit, searchGenru){
   useEffect(() => {
     if(!searchSubmit) return;
 
+    const REACT_API = process.env.REACT_API;
+
     const data = {name: searchSubmit, user_id: userData.user_id};
 
-    fetch('http://localhost:3100/account', {
+    fetch(`${ REACT_API }/account`, {
       method: 'POST',
       body: JSON.stringify(data),
       headers : new Headers({ "Content-type" : "application/json" })

@@ -4,7 +4,9 @@ function useWorkRanking(){
   const [resultList, setResultList] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:3100/workRanking')
+    const REACT_API = process.env.REACT_API;
+    
+    fetch(`${ REACT_API }/workRanking`)
     .then(response => response.json())
     .then(result => setResultList({work: result}));
   }, [])

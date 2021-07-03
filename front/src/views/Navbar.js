@@ -129,7 +129,7 @@ function Navbar(){
       {/* header */}
       <AppBar className={ classes.header } postion="static">
         <Toolbar style={ tool }>
-          <Typography style={ title } onClick={ onTop } variant="h3">Audience</Typography>
+          <Typography style={ title } onClick={ onTop } variant="h3">{ process.env.REACT_API }</Typography>
           {// ログイン中のユーザーが自分のアカウントページにアクセスした時、設定アイコンを表示
             (location.pathname.indexOf('/account/' + id) === 0) && (userData !== 'loading') && (userData !== 'empty') && (
             <>

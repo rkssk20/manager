@@ -121,6 +121,8 @@ function Setting(){
   const pushSubmit = async(e) => {
     await e.preventDefault();
 
+    const REACT_API = process.env.REACT_API;
+
     // ①名前を変更した時、1文字以上あるか
     if(inputName !== userData.user_name){
       if(inputName.length < 1){
@@ -143,7 +145,7 @@ function Setting(){
       
       // ③-①すでに初期画像から変更したことがあるなら日数を調べ、30日以上なら削除する
       if(pictureHead === 'https://audience-icons'){
-        const timeCheck = await fetch('http://localhost:3100/delete', {
+        const timeCheck = await fetch(`${ REACT_API }/delete`, {
           method: 'POST',
           body: JSON.stringify({ image: userData.picture }),
           headers : {"Content-type" : "application/json"}
@@ -158,7 +160,7 @@ function Setting(){
         const formData = await new FormData();
         await formData.append('icon', cropResult, imageName);
         
-        const sendS3 = await fetch('http://localhost:3100/icon', {
+        const sendS3 = await fetch(`${ REACT_API }/icon`, {
           method: 'POST',
           body: formData,
         });
@@ -193,7 +195,7 @@ function Setting(){
     };
 
     // ④ RDSにアップロード
-    fetch('http://localhost:3100/setting', {
+    fetch(`${ REACT_API }/setting`, {
       method: 'POST',
       body: JSON.stringify(data), 
       headers : new Headers({ "Content-type" : "application/json" })

@@ -11,8 +11,10 @@ function usePost(accountData, page){
     if(!accountData) return;
     
     const data = {user_id: userData.user_id, page: page};
+
+    const REACT_API = process.env.REACT_API;
     
-    fetch('http://localhost:3100/posts', {
+    fetch(`${ REACT_API }/posts`, {
       method: 'POST',
       body: JSON.stringify(data),
       headers : new Headers({ "Content-type" : "application/json" })

@@ -127,7 +127,9 @@ function Write(){
       date: locationList.date
     };
 
-    fetch('http://localhost:3100/review', {
+    const REACT_API = process.env.REACT_API;
+
+    fetch(`${ REACT_API }/review`, {
       method: 'POST',
       body: JSON.stringify(data),
       headers : new Headers({ "Content-type" : "application/json" })

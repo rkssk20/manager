@@ -1,4 +1,4 @@
-name: Build React on S3
+name: React on S3 & Express on Lambda
 
 on:
   push:
@@ -17,6 +17,7 @@ jobs:
         run: npm install
         working-directory: ./front
 
+      # Reactのbuildに使用する.envの作成
       - name: Create env
         run: |
           touch .env
@@ -24,6 +25,7 @@ jobs:
           echo "REACT_APP_ANIME=${{ secrets.REACT_APP_ANIME }}" >> .env
           echo "REACT_APP_AUTH0_DOMAIN=${{ secrets.REACT_APP_AUTH0_DOMAIN }}" >> .env
           echo "REACT_APP_AUTH0_CLIENT=${{ secrets.REACT_APP_AUTH0_CLIENT }}" >> .env
+          echo "REACT_API=${{ secrets.REACT_API }}" >> .env
         working-directory: ./front
         
       - name: Build
