@@ -28,7 +28,7 @@ function FollowButton(props){
 
     setCheckFollow(!checkFollow);
 
-    const REACT_API = process.env.REACT_API;
+    const REACT_APP_API = process.env.REACT_APP_API;
 
     const data = {
       user_id: props.user_id,
@@ -37,7 +37,7 @@ function FollowButton(props){
 
     // フォローを外す
     if(checkFollow){
-      fetch(`${ REACT_API }/unFollow`, {
+      fetch(`${ REACT_APP_API }/unFollow`, {
         method: 'POST',
         body: JSON.stringify(data),
         headers: new Headers({ "Content-type" : "application/json" })
@@ -46,7 +46,7 @@ function FollowButton(props){
       
     // フォローする
     }else{
-      fetch(`${ REACT_API }/follow`, {
+      fetch(`${ REACT_APP_API }/follow`, {
         method: 'POST',
         body: JSON.stringify(data),
         headers: new Headers({ "Content-type" : "application/json" })

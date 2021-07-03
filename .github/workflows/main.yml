@@ -6,9 +6,8 @@ on:
       - main
 
 jobs:
-  build:
+  build1:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@main
@@ -25,7 +24,7 @@ jobs:
           echo "REACT_APP_ANIME=${{ secrets.REACT_APP_ANIME }}" >> .env
           echo "REACT_APP_AUTH0_DOMAIN=${{ secrets.REACT_APP_AUTH0_DOMAIN }}" >> .env
           echo "REACT_APP_AUTH0_CLIENT=${{ secrets.REACT_APP_AUTH0_CLIENT }}" >> .env
-          echo "REACT_API=${{ secrets.REACT_API }}" >> .env
+          echo "REACT_APP_API=${{ secrets.REACT_APP_API }}" >> .env
         working-directory: ./front
         
       - name: Build
@@ -42,3 +41,33 @@ jobs:
       - name: S3 sync
         run: |
           aws s3 sync ./front/build s3://app-audience --delete
+
+  build2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./server
+    
+      - name: Create env
+        run: |
+          touch .env
+          echo "MYSQL_HOST=${{ secrets.MYSQL_HOST }}" >> .env
+          echo "MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" >> .env
+          echo "MYSQL_USER=${{ secrets.MYSQL_USER }}" >> .env
+          echo "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}" >> .env
+          echo "ACCESS_KEY_ID=${{ secrets.ACCESS_KEY_ID }}" >> .env
+          echo "SECRET_ACCESS_KEY=${{ secrets.SECRET_ACCESS_KEY }}" >> .env
+          echo "BUCKET=${{ secrets.BUCKET }}" >> .env
+          echo "SECRET_ACCESS_KEY=${{ secrets.SECRET_ACCESS_KEY }}" >> .env
+          echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" >> .env
+          echo "CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}" >> .env
+          echo "SECRET_ACCESS_KEY=${{ secrets.SECRET_ACCESS_KEY }}" >> .env
+        working-directory: ./server
+
+      - name: Build
+        run: npx serverless deploy
+        working-directory: ./server

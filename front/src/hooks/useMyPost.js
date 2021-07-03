@@ -12,9 +12,9 @@ function useMyPost(accountData, page){
     
     const data = {user_id: userData.user_id, account_id: accountData.user_id, page: page};
 
-    const REACT_API = process.env.REACT_API;
+    const REACT_APP_API = process.env.REACT_APP_API;
     
-    fetch(`${ REACT_API }/myPosts`, {
+    fetch(`${ REACT_APP_API }/myPosts`, {
       method: 'POST',
       body: JSON.stringify(data),
       headers : new Headers({ "Content-type" : "application/json" })

@@ -6,11 +6,11 @@ function Music(work){
   useEffect(() => {
     if(!work) return;
 
-    const REACT_API = process.env.REACT_API;
+    const REACT_APP_API = process.env.REACT_APP_API;
 
     const data = {id: work}
 
-    fetch(`${ REACT_API }/music`, {
+    fetch(`${ REACT_APP_API }/music`, {
       method: 'POST',
       body: JSON.stringify(data),
       headers : new Headers({ "Content-type" : "application/json" })

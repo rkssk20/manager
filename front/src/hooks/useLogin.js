@@ -12,9 +12,9 @@ function useLogin(){
 
       const data = {id: user.sub, myAccount: true};
 
-      const REACT_API = process.env.REACT_API;
+      const REACT_APP_API = process.env.REACT_APP_API;
         
-      fetch(`${ REACT_API }/profile`, {
+      fetch(`${ REACT_APP_API }/profile`, {
         method: 'POST',
         body: JSON.stringify(data),
         headers : new Headers({ "Content-type" : "application/json" })

@@ -26,10 +26,10 @@ function Detail(props){
   const onDelete = (e) => {
     e.stopPropagation();
 
-    const REACT_API = process.env.REACT_API;
+    const REACT_APP_API = process.env.REACT_APP_API;
 
     const data = {review_id: props.review_id};
-    fetch(`${ REACT_API }/deletePost`, {
+    fetch(`${ REACT_APP_API }/deletePost`, {
       method: 'POST',
       body: JSON.stringify(data),
       headers : new Headers({ "Content-type" : "application/json" })

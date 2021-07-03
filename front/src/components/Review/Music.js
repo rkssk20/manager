@@ -6,9 +6,9 @@ function Music(searchSubmit, searchGenru){
   useEffect(() => {
     if(!searchSubmit || !searchGenru) return;
 
-    const REACT_API = process.env.REACT_API;
+    const REACT_APP_API = process.env.REACT_APP_API;
 
-    fetch(`${ REACT_API }/music`, {
+    fetch(`${ REACT_APP_API }/music`, {
       method: 'POST',
       body: JSON.stringify({submit: searchSubmit}),
       headers : new Headers({ "Content-type" : "application/json" })
