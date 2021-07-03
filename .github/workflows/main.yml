@@ -19,6 +19,7 @@ jobs:
 
       - name: Create env
         run: |
+          touch .env
           echo "REACT_APP_MOVIE=${{ secrets.REACT_APP_MOVIE }}" >> .env
           echo "REACT_APP_ANIME=${{ secrets.REACT_APP_ANIME }}" >> .env
           echo "REACT_APP_AUTH0_DOMAIN=${{ secrets.REACT_APP_AUTH0_DOMAIN }}" >> .env
