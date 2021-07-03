@@ -19,8 +19,10 @@ jobs:
 
       - name: Create env
         run: |
-          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> .env
-          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> .env
+          echo "REACT_APP_MOVIE=${{ secrets.REACT_APP_MOVIE }}" >> .env
+          echo "REACT_APP_ANIME=${{ secrets.REACT_APP_ANIME }}" >> .env
+          echo "REACT_APP_AUTH0_DOMAIN=${{ secrets.REACT_APP_AUTH0_DOMAIN }}" >> .env
+          echo "REACT_APP_AUTH0_CLIENT=${{ secrets.REACT_APP_AUTH0_CLIENT }}" >> .env
         working-directory: ./front
         
       - name: Build
