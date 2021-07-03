@@ -85,7 +85,7 @@ app.get('/', (req, res) => {
     
   //   res.send(result + 'success');
   // }));
-  res.send(process.env.MYSQL_DATABASE);
+  res.send(process.env.BUCKET);
 });
 
 // catch 404 and forward to error handler
