@@ -29,4 +29,5 @@ jobs:
           aws-region: ap-northeast-1
           
       - name: S3 sync
-        run: aws s3 sync ./front/build s3://app-audience --delete
+        run: |
+          aws s3 sync ./front/build s3://app-audience --delete
