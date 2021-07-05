@@ -49,10 +49,12 @@ package:
     - Dockerfile
 
 functions:
-  exampleFunction:
-    name: server-audience
-    handler: lambda.handler
+  app:
+    handler: wsgi_handler.handler
+    :
     events:
       - http: ANY /
-      - http: 'ANY {proxy+}'
-        cors: true
+      - http:
+          path: '/{proxy+}'
+          method: ANY
+          cors: true
