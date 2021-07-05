@@ -77,15 +77,18 @@ var pool = mysql.createPool({
 global.pool = pool;
 
 app.get('/', (req, res) => {
-  // res.send(pool.query('SELECT title from works', function(err, result){
-  //   if(err){
-  //     res.send(err + 'error');
-  //     return
-  //   }
-    
-  //   res.send(result + 'success');
-  // }));
   res.send(process.env.BUCKET);
+});
+
+app.get('/test', (req, res) => {
+  pool.query('SELECT title FROM works', function(err, res){
+    if(err){
+      console.log(err);
+      throw err;
+    };
+    
+    res.send(res);
+  })
 });
 
 // catch 404 and forward to error handler

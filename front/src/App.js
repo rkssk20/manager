@@ -56,7 +56,7 @@ function App(){
   const userData = useLogin();
 
   useEffect(() => {
-    fetch(`${ process.env.REACT_APP_API }/`)
+    fetch(`${ process.env.REACT_APP_API }/test`)
     .then(response => response.text())
     .then(result => console.log(result))
     .catch(err => console.log(err));
