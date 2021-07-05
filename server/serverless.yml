@@ -2,6 +2,7 @@ service: server
 
 plugins:
   - serverless-dotenv-plugin
+  # - serverless-domain-manager
 
 provider:
   name: aws
@@ -17,7 +18,22 @@ provider:
     BUCKET: ${env::BUCKET}
     CLIENT_ID: ${env::CLIENT_ID}
     CLIENT_SECRET: ${env::CLIENT_SECRET}
+  vpc:
+    securityGroupIds:
+      - sg-0eed6f894355bf181
+    subnetIds:
+      - subnet-02d11926e7f3b3d15
+      - subnet-09bc32c147f35ee30
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "ec2:CreateNetworkInterface"
+        - "ec2:DescribeNetworkInterfaces"
+        - "ec2:DeleteNetworkInterface"
+      Resource:
+        - "*"
   deploymentBucket:
+    name: server-audience
     blockPublicAccess: true
   # endpointType: private
   # resourcePolicy:
@@ -39,4 +55,24 @@ functions:
     handler: lambda.handler
     events:
       - http: ANY /
+        cors: 
+          origin: ${env::REACT_APP_API}
+          headers: 
+            - Content-Type
+            - X-Amz-Date
+            - Authorization
+            - X-Api-Key
+            - X-Amz-Security-Token
+            - X-Amz-User-Agent
+          allowCredentials: true
       - http: 'ANY {proxy+}'
+        cors: 
+          origin: ${env::REACT_APP_API}
+          headers: 
+            - Content-Type
+            - X-Amz-Date
+            - Authorization
+            - X-Api-Key
+            - X-Amz-Security-Token
+            - X-Amz-User-Agent
+          allowCredentials: true
