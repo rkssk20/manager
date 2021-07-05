@@ -1,5 +1,4 @@
 name: React on S3 & Express on Lambda
-
 on:
   push:
     branches:
