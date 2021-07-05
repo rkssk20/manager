@@ -1,4 +1,5 @@
 service: server
+
 plugins:
   - serverless-dotenv-plugin
   # - serverless-domain-manager
