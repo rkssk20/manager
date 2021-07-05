@@ -1,4 +1,4 @@
-import React, { createContext, useEffect } from 'react';
+import React, { createContext } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import useLogin from './hooks/useLogin';
 import Navbar from './views/Navbar';
@@ -63,10 +63,6 @@ function App(){
       <Login />
     );
   };
-
-  useEffect(() => {
-    console.log(test)
-  }, []);
 
   return(
     <BrowserRouter>
