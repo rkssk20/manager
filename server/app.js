@@ -80,13 +80,17 @@ app.get('/', (req, res) => {
   res.send(process.env.BUCKET);
 });
 
+app.get('/api', (req, res) => {
+  res.send('lalala');
+});
+
 app.get('/test', (req, res) => {
   pool.query('SELECT title FROM works', function(err, res){
     if(err){
       console.log(err);
       throw err;
     };
-    
+
     res.send(res);
   })
 });
