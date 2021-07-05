@@ -55,5 +55,4 @@ functions:
     events:
       - http: ANY /
       - http: 'ANY {proxy+}'
-        method: ANY
         cors: true
