@@ -50,6 +50,7 @@ package:
 
 functions:
   exampleFunction:
+    name: server-audience
     handler: lambda.handler
     events:
       - http: ANY /
