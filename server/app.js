@@ -21,7 +21,7 @@ var likeRouter = require('./routes/like');
 var unLikeRouter = require('./routes/unLike');
 var settingRouter = require('./routes/setting');
 var deleteRouter = require('./routes/delete');
-// var iconRouter = require('./routes/icon');
+var iconRouter = require('./routes/icon');
 var favoritesRouter = require('./routes/favorites');
 var workRouter = require('./routes/work');
 var workRankingRouter = require('./routes/workRanking');
@@ -57,7 +57,7 @@ app.use('/workPosts', workPostsRouter);
 app.use('/favorites', favoritesRouter);
 app.use('/setting', settingRouter);
 app.use('/delete', deleteRouter);
-// app.use('/icon', iconRouter);
+app.use('/icon', iconRouter);
 app.use('/work', workRouter);
 app.use('/workRanking', workRankingRouter);
 app.use('/likeRanking', likeRankingRouter);
@@ -75,22 +75,6 @@ var pool = mysql.createPool({
 });
 
 global.pool = pool;
-
-app.get('/', (req, res) => {
-  res.send(process.env.BUCKET);
-});
-
-app.get('/api', (req, res) => {
-  res.send('lalala');
-});
-
-app.get('/test', (req, res) => {
-  pool.query('SELECT * FROM users', function(error, result){
-    if(error) throw error;
-
-    res.send(result);
-  });
-});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
