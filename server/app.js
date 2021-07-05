@@ -85,14 +85,11 @@ app.get('/api', (req, res) => {
 });
 
 app.get('/test', (req, res) => {
-  pool.query('SELECT title FROM works', function(err, res){
-    if(err){
-      console.log(err);
-      throw err;
-    };
+  pool.query('SELECT * FROM users', function(error, result){
+    if(error) throw error;
 
-    res.send(res);
-  })
+    res.send(result);
+  });
 });
 
 // catch 404 and forward to error handler
