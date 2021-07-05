@@ -18,6 +18,7 @@ provider:
     CLIENT_ID: ${env::CLIENT_ID}
     CLIENT_SECRET: ${env::CLIENT_SECRET}
   deploymentBucket:
+    name: server-audience
     blockPublicAccess: true
   # endpointType: private
   # resourcePolicy:
