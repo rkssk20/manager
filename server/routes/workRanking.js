@@ -5,8 +5,6 @@ var router = express.Router();
 // 一週間以内の投稿が3件未満の場合、さらに一週間前から取得。これを3件たまるまで繰り返す。
 router.get('/', async function(req, res){
 
-  res.set({ 'Access-Control-Allow-Origin': '*' });
-  
   const resultList = [];
   let day = 0;
   const promisePool = pool.promise();

@@ -55,7 +55,7 @@ functions:
       - http: ANY /
       - http: 'ANY {proxy+}'
         cors:
-          origin: ${env::REACT_APP_API}
+          origin: '*'
           headers: 
             - Content-Type
             - X-Amz-Date
