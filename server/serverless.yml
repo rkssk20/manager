@@ -41,8 +41,7 @@ package:
     - Dockerfile
 
 functions:
-  exampleFunction:
-    name: audience_server
+  serverlessTest:
     handler: lambda.handler
     events:
       - http: ANY /
