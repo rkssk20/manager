@@ -51,8 +51,7 @@ package:
 functions:
   exampleFunction:
     handler: lambda.handler
-    
     events:
       - http: ANY /
       - http: 'ANY {proxy+}'
-        # cors: true
+        cors: true
