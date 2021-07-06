@@ -32,7 +32,7 @@ provider:
       Resource:
         - "*"
   deploymentBucket:
-    # name: server-audience
+    name: server-audience
     blockPublicAccess: true
   # endpointType: private
   # resourcePolicy:
