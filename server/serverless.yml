@@ -23,9 +23,17 @@ provider:
     subnetIds:
       - subnet-02d11926e7f3b3d15
       - subnet-09bc32c147f35ee30
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "ec2:CreateNetworkInterface"
+        - "ec2:DescribeNetworkInterfaces"
+        - "ec2:DeleteNetworkInterface"
+      Resource:
+        - "*"
   deploymentBucket:
-    blockPublicAccess: true
     name: server-audience
+    blockPublicAccess: true
   # endpointType: private
   # resourcePolicy:
   #  - Effect: Allow
@@ -41,8 +49,10 @@ package:
     - Dockerfile
 
 functions:
-  serverlessTest:
+  exampleFunction:
     handler: lambda.handler
+    
     events:
       - http: ANY /
       - http: 'ANY {proxy+}'
+        # cors: true
