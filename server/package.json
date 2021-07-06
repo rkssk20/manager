@@ -26,7 +26,6 @@
     "spotify-web-api-node": "^5.0.2"
   },
   "devDependencies": {
-    "serverless-domain-manager": "^5.1.0",
     "serverless-dotenv-plugin": "^3.9.0"
   }
 }
