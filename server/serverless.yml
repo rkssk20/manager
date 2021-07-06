@@ -55,12 +55,12 @@ functions:
       - http: ANY /
       - http: 'ANY {proxy+}'
         cors: true
-          # origin: ${env::APP_URL}
-          # headers: 
-          #   - Content-Type
-          #   - X-Amz-Date
-          #   - Authorization
-          #   - X-Api-Key
-          #   - X-Amz-Security-Token
-          #   - X-Amz-User-Agent
-          # allowCredentials: true
+          origin: ${env::APP_URL}
+          headers: 
+            - Content-Type
+            - X-Amz-Date
+            - Authorization
+            - X-Api-Key
+            - X-Amz-Security-Token
+            - X-Amz-User-Agent
+          allowCredentials: true
