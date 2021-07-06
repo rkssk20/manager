@@ -17,12 +17,12 @@ provider:
     BUCKET: ${env::BUCKET}
     CLIENT_ID: ${env::CLIENT_ID}
     CLIENT_SECRET: ${env::CLIENT_SECRET}
-  vpc:
-    securityGroupIds:
-      - sg-0eed6f894355bf181
-    subnetIds:
-      - subnet-02d11926e7f3b3d15
-      - subnet-09bc32c147f35ee30
+  # vpc:
+  #   securityGroupIds:
+  #     - sg-0eed6f894355bf181
+  #   subnetIds:
+  #     - subnet-02d11926e7f3b3d15
+  #     - subnet-09bc32c147f35ee30
   deploymentBucket:
     blockPublicAccess: true
     name: server-audience
