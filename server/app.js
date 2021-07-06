@@ -36,9 +36,9 @@ app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(cors({
-  "Access-Control-Allow-Headers" : "Content-Type",
-  "Access-Control-Allow-Origin": "https://www.api.audience,cf",
-  "Access-Control-Allow-Methods": "OPTIONS,POST,GET,DELETE"
+  origin: "https://www.audience,cf",
+  methods: "OPTIONS,POST,GET,DELETE",
+  credentials: true,
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
