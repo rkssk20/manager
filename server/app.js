@@ -76,18 +76,6 @@ var pool = mysql.createPool({
 
 global.pool = pool;
 
-app.get('/api', (req, res) => {
-  res.send('lalala');
-});
-
-app.get('/test', (req, res) => {
-  pool.query('SELECT * FROM users', function(error, result){
-    if(error) throw error;
-
-    res.send(result);
-  });
-});
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
