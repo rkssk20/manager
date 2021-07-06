@@ -36,7 +36,7 @@ app.set('view engine', 'jade');
 
 app.use(logger('dev'));
 app.use(cors({
-  origin: "https://www.audience,cf",
+  origin: "https://www.audience.cf",
   methods: "OPTIONS,POST,GET,DELETE",
   credentials: true,
 }));
