@@ -32,7 +32,7 @@ provider:
       Resource:
         - "*"
   deploymentBucket:
-    name: server-audience
+    # name: server-audience
     blockPublicAccess: true
   # endpointType: private
   # resourcePolicy:
@@ -50,6 +50,7 @@ package:
 
 functions:
   exampleFunction:
+    # name: audience_server
     handler: lambda.handler
     events:
       - http: ANY /
