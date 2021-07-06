@@ -56,11 +56,11 @@ functions:
       - http: 'ANY {proxy+}'
         cors:
           origin: ${env::REACT_APP_API}
-            headers: 
-              - Content-Type
-              - X-Amz-Date
-              - Authorization
-              - X-Api-Key
-              - X-Amz-Security-Token
-              - X-Amz-User-Agent
-            allowCredentials: true
+          headers: 
+            - Content-Type
+            - X-Amz-Date
+            - Authorization
+            - X-Api-Key
+            - X-Amz-Security-Token
+            - X-Amz-User-Agent
+          allowCredentials: true
