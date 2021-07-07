@@ -53,5 +53,5 @@ functions:
     handler: lambda.handler
     events:
       - http: ANY /
-      - http: api /
+      - http: ANY /api
       - http: 'ANY {proxy+}'
