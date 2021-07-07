@@ -81,12 +81,20 @@ app.get('/api', (req, res) => {
 });
 
 app.get('/test', (req, res) => {
-  pool.query('SELECT * FROM users', function(error, result){
+  pool.query('SELECT * FROM works', function(error, result){
     if(error) throw error;
 
     res.send(result);
   });
 });
+
+app.get('posttest', (req, res) => {
+  pool.query(`SELECT title FROM reviews WHERE likes=${ req.body.likes }`, function(error, result){
+    if(error) throw error;
+
+    res.send(result)
+  })
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

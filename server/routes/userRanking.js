@@ -9,38 +9,42 @@ router.get('/', async function(req, res){
   let day = 0;
   const promisePool = pool.promise();
 
-  function Query(){
-    async function Loop(){      
-      const [rows, fields] = await promisePool.query(
-        `SELECT
-          users.user_name,
-          users.user_id,
-          users.picture,
-          users.profile,
-          sum(reviews.likes)
-        FROM reviews
-        INNER JOIN users ON reviews.user_id=users.user_id
-        WHERE reviews.created_at BETWEEN NOW() - INTERVAL ${ day + 7 } DAY AND NOW() - INTERVAL ${ day } DAY
-        GROUP BY reviews.user_id
-        ORDER BY reviews.likes DESC
-        LIMIT 3`
-      );
+  try{
+    function Query(){
+      async function Loop(){      
+        const [rows, fields] = await promisePool.query(
+          `SELECT
+            users.user_name,
+            users.user_id,
+            users.picture,
+            users.profile,
+            sum(reviews.likes)
+          FROM reviews
+          INNER JOIN users ON reviews.user_id=users.user_id
+          WHERE reviews.created_at BETWEEN NOW() - INTERVAL ${ day + 7 } DAY AND NOW() - INTERVAL ${ day } DAY
+          GROUP BY reviews.user_id
+          ORDER BY reviews.likes DESC
+          LIMIT 3`
+        );
 
-      resultList.push(rows);
-      return resultList.length;
+        resultList.push(rows);
+        return resultList.length;
+      };
+
+      Loop().then((result) => {
+        if(result < 3){
+          day = day + 7;
+          Query();
+        }else{
+          res.send(...resultList);
+        }
+      });
     };
 
-    Loop().then((result) => {
-      if(result < 3){
-        day = day + 7;
-        Query();
-      }else{
-        res.send(...resultList);
-      }
-    });
-  };
-
-  Query();
+    Query();
+  }catch(error){
+    console.log(error);
+  }
 });
 
 module.exports = router;
