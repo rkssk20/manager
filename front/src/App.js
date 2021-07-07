@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React, { createContext, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import useLogin from './hooks/useLogin';
 import Navbar from './views/Navbar';
@@ -54,6 +54,18 @@ const theme = createMuiTheme({
 
 function App(){
   const userData = useLogin();
+
+  useEffect(() => {
+    fetch(`${ process.env.REACT_APP_API }/test`)
+    .then(res => res.json())
+    .then(result => console.log(result))
+    .catch(err => console.log(err));
+
+    fetch(`${ process.env.REACT_APP_API }/api`)
+    .then(res => res.json())
+    .then(result => console.log(result))
+    .catch(err => console.log(err));
+  }, []);
 
   // ログインしていなければ案内するページ
   function PrivateRoute(props){
