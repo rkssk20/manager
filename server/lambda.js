@@ -8,5 +8,5 @@ exports.handler = (event, context, callback) => {
     statusCode: 200,
     body: JSON.stringify(event)
   })
-  serverlessExpress.proxy(server, event, context);
+  serverlessExpress.proxy(server, event, context, callback);
 };
