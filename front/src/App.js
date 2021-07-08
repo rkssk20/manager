@@ -71,7 +71,7 @@ function App(){
       body: JSON.stringify({likes: 1}),
       headers : new Headers({ "Content-type" : "application/json" })
     })
-    .then(res => res.json())
+    .then(response => response.json())
     .then(result => console.log(result.body))
     .catch(err => console.log(err));
   }, []);
