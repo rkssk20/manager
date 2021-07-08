@@ -147,7 +147,8 @@ function Result(props){
 };
 
 function SearchPage(){
-  const resultList = useUserRanking();
+  // const resultList = useUserRanking();
+  const resultList = null;
   const [searchSubmit, setSearchSubmit] = useState('');
   const placeholder = '作品名、またはアカウント名で検索！';
 

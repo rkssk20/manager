@@ -86,7 +86,8 @@ function Result(props){
 };
 
 function Search(){
-  const resultList = useWorkRanking();
+  // const resultList = useWorkRanking();
+  const resultList = null;
   const [searchSubmit, setSearchSubmit] = useState('');
   const placeholder = 'レビューしたい作品を検索！'
 

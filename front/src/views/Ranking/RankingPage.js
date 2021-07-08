@@ -20,7 +20,8 @@ const intro ={
 };
 
 function RankingPage(){
-  const resultList = useRanking();
+  // const resultList = useRanking();
+  const resultList = null;
 
   return(
     resultList ?
