@@ -21,9 +21,7 @@ const binaryMimeTypes = [
   'text/xml'
 ];
 
-console.log(app);
-
-const server = serverlessExpress.createServer(app);
+const server = serverlessExpress.createServer(app, binaryMimeTypes);
 
 exports.handler = (event, context, callback) => {
 
@@ -33,7 +31,7 @@ exports.handler = (event, context, callback) => {
       "body": JSON.stringify(server)
     };
 
-    console.log(response)
+    console.log({'response': response})
 
     callback(null, response);
   // serverlessExpress.proxy(server, event, callback)

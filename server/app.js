@@ -109,10 +109,7 @@ app.post('/posttest', (req, res) => {
   pool.query(`SELECT * FROM reviews WHERE likes=${ req.body.likes }`, function(error, result){
     if(error) throw error;
 
-    res.send({
-      "statusCode": 200,
-      "body": JSON.stringify(result)
-    });
+    return result
   })
 })
 
