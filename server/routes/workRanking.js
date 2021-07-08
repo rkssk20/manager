@@ -37,7 +37,7 @@ router.get('/', async function(req, res){
           day = day + 7;
           Query();
         }else{
-          res.send({statusCode: 200, body: JSON.stringify(...resultList)});
+          res.send({"statusCode": 200, "body": JSON.stringify(...resultList)});
         }
       });
     };

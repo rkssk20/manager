@@ -24,5 +24,6 @@ const app = require('./app');
 const server = serverlessExpress.createServer(app, null);
 
 exports.handler = (event, context) => {
+  context.callbackWaitsForEmptyEventLoop = false;
   return awsServerlessExpress.proxy(server, event, context,'PROMISE').promise
 };
