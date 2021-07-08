@@ -21,9 +21,8 @@ const app = require('./app');
 //   'text/xml'
 // ];
 
-const server = serverlessExpress.createServer(app, binaryMimeTypes);
+const server = serverlessExpress.createServer(app, null);
 
 exports.handler = (event, context) => {
-  console.log(server, event, context);
-  serverlessExpress.proxy(server, event, context);
+  return awsServerlessExpress.proxy(server, event, context,'PROMISE').promise
 };
