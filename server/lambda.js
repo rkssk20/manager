@@ -21,16 +21,19 @@ const binaryMimeTypes = [
   'text/xml'
 ];
 
+console.log(app);
+
 const server = serverlessExpress.createServer(app);
 
 exports.handler = (event, context, callback) => {
-    console.log(server);
+
 
     var response = {
       "statusCode": 200,
-      "body": JSON.stringify(server),
-      "isBase64Encoded": false
+      "body": JSON.stringify(server)
     };
+
+    console.log(response)
 
     callback(null, response);
   // serverlessExpress.proxy(server, event, callback)
