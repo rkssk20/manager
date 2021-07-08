@@ -92,10 +92,7 @@ app.get('/test', (req, res) => {
 
     console.log({'result': result});
 
-    res.send({
-      "statusCode": 200,
-      "body": JSON.stringify(result)
-    });
+    res.send(result);
   });
 });
 
@@ -104,11 +101,7 @@ app.post('/posttest', (req, res) => {
     if(error) throw error;
 
     res.send({
-      "isBase64Encoded": false,
       "statusCode": 200,
-      "headers": {
-        "Access-Control-Allow-Origin": "*"
-      },
       "body": JSON.stringify(result)
     });
   })
