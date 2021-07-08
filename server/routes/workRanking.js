@@ -37,7 +37,14 @@ router.get('/', async function(req, res){
           day = day + 7;
           Query();
         }else{
-          res.send({"statusCode": 200, "body": JSON.stringify(...resultList)});
+          res.send({
+            "isBase64Encoded": false,
+            "statusCode": 200,
+            "headers": {
+              "Access-Control-Allow-Origin": "*"
+            },
+            "body": JSON.stringify(...resultList)
+          });
         }
       });
     };
