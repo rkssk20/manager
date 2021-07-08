@@ -23,16 +23,4 @@ const binaryMimeTypes = [
 
 const server = serverlessExpress.createServer(app, binaryMimeTypes);
 
-exports.handler = (event, context, callback) => {
-
-
-    var response = {
-      "statusCode": 200,
-      "body": JSON.stringify(server)
-    };
-
-    console.log({'response': response})
-
-    callback(null, response);
-  // serverlessExpress.proxy(server, event, callback)
-};
+exports.handler = (event, context, callback) => serverlessExpress.proxy(server, event, callback);

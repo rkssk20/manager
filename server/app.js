@@ -109,7 +109,14 @@ app.post('/posttest', (req, res) => {
   pool.query(`SELECT * FROM reviews WHERE likes=${ req.body.likes }`, function(error, result){
     if(error) throw error;
 
-    return result
+    res.send({
+      "isBase64Encoded": false,
+      "statusCode": 200,
+      "headers": {
+        "Access-Control-Allow-Origin": "*"
+      },
+      "body": JSON.stringify(result)
+    });
   })
 })
 
