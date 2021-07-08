@@ -66,14 +66,14 @@ function App(){
     .then(result => console.log(result))
     .catch(err => console.log(err));
 
-    // fetch(`${ process.env.REACT_APP_API }/posttest`, {
-    //   method: 'POST',
-    //   body: JSON.stringify({likes: 1}),
-    //   headers : new Headers({ "Content-type" : "application/json" })
-    // })
-    // .then(res => res.json())
-    // .then(result => console.log(result))
-    // .catch(err => console.log(err));
+    fetch(`${ process.env.REACT_APP_API }/posttest`, {
+      method: 'POST',
+      body: JSON.stringify({likes: 1}),
+      headers : new Headers({ "Content-type" : "application/json" })
+    })
+    .then(res => res.json())
+    .then(result => console.log(result.body))
+    .catch(err => console.log(err));
   }, []);
 
   // ログインしていなければ案内するページ
