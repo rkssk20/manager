@@ -45,11 +45,7 @@ router.get('/', async function(req, res){
           Query();
         }else{
           res.send({
-            "isBase64Encoded": false,
             "statusCode": 200,
-            "headers": {
-              "Access-Control-Allow-Origin": "*"
-            },
             "body": JSON.stringify(...resultList)
           });
         }

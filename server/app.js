@@ -81,11 +81,7 @@ global.pool = pool;
 
 app.get('/api', (req, res) => {
   res.send({
-    "isBase64Encoded": false,
       "statusCode": 200,
-      "headers": {
-        "Access-Control-Allow-Origin": "*"
-      },
       "body": 'lalala'
   });
 });
@@ -94,12 +90,10 @@ app.get('/test', (req, res) => {
   pool.query('SELECT * FROM works', function(error, result){
     if(error) throw error;
 
+    console.log({'result': result});
+
     res.send({
-      "isBase64Encoded": false,
       "statusCode": 200,
-      "headers": {
-        "Access-Control-Allow-Origin": "*"
-      },
       "body": JSON.stringify(result)
     });
   });
