@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 var mysql = require('mysql2');
+const serverlessExpress = require('@vendia/serverless-express/src/middleware');
 
 var accountRouter = require('./routes/account');
 var profileRouter = require('./routes/profile');
@@ -34,6 +35,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(serverlessExpress.eventContext());
 app.use(logger('dev'));
 app.use(cors());
 app.use(express.json());
