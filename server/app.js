@@ -80,17 +80,12 @@ var pool = mysql.createPool({
 global.pool = pool;
 
 app.get('/api', (req, res) => {
-  res.send({
-      "statusCode": 200,
-      "body": 'lalala'
-  });
+  res.send('lalala');
 });
 
 app.get('/test', (req, res) => {
   pool.query('SELECT * FROM works', function(error, result){
     if(error) throw error;
-
-    console.log({'result': result});
 
     res.send(result);
   });
