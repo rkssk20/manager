@@ -21,11 +21,6 @@ const binaryMimeTypes = [
   'text/xml'
 ];
 
-// const server = serverlessExpress.createServer(app, null);
-
-exports.handler = serverlessExpress({
-  app,
-  binaryMimeTypes
-}).handler;
+serverlessExpress({app, resolutionMode: 'CALLBACK'});
 
 // exports.handler = (event, context) => serverlessExpress.proxy(server, event, context);
