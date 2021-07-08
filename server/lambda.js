@@ -21,29 +21,21 @@ const binaryMimeTypes = [
   'text/xml'
 ];
 
-serverlessExpress({
-  app,
-  eventSource: {
-    getRequest: alb.getRequest,
-    getResponse: ({
-        statusCode,
-        body,
-        headers,
-        isBase64Encoded
-    }) => {
-        const multiValueHeaders = {};
-        Object.entries(headers).forEach(([headerKey, headerValue]) => {
-            const headerArray = Array.isArray(headerValue) ? headerValue : [String(headerValue)];
-            multiValueHeaders[headerKey.toLowerCase()] = headerArray;
-        });
-        return {
-            statusCode,
-            body,
-            multiValueHeaders,
-            isBase64Encoded
-        }
-    }
-  }
-});
+const server = serverlessExpress.createServer(app);
 
-// exports.handler = (event, context) => serverlessExpress.proxy(server, event, context);
+exports.handler = (event, context, callback) => {
+  server.then(result => {
+    console.log(result);
+
+    var response = {
+      "statusCode": 200,
+      "body": JSON.stringify(result),
+      "isBase64Encoded": false
+    };
+
+    callback(null, response);
+  }).catch(error => {
+    callback(error);
+  })
+  // serverlessExpress.proxy(server, event, callback)
+};

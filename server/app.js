@@ -109,6 +109,7 @@ app.post('/posttest', (req, res) => {
   pool.query(`SELECT title FROM reviews WHERE likes=${ req.body.likes }`, function(error, result){
     if(error) throw error;
 
+    res.setHeader('Content-Length', String(len))
     res.json({
       "isBase64Encoded": false,
       "statusCode": 200,
