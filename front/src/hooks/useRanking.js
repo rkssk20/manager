@@ -8,15 +8,15 @@ function useRanking(){
 
     const work = fetch(`${ REACT_APP_API }/workRanking`).then(response => response.json()).then(result => {
       console.log(result)
-      result.body
+      return result.body
     });
     const like = fetch(`${ REACT_APP_API }/likeRanking`).then(response => response.json()).then(result => {
       console.log(result)
-      result.body
+      return result.body
     });
     const user = fetch(`${ REACT_APP_API }/userRanking`).then(response => response.json()).then(result => {
       console.log(result)
-      result.body
+      return result.body
     });
 
     Promise.all([work, like, user])
