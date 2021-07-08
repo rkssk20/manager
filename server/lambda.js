@@ -24,18 +24,14 @@ const binaryMimeTypes = [
 const server = serverlessExpress.createServer(app);
 
 exports.handler = (event, context, callback) => {
-  server.then(result => {
-    console.log(result);
+    console.log(server);
 
     var response = {
       "statusCode": 200,
-      "body": JSON.stringify(result),
+      "body": JSON.stringify(server),
       "isBase64Encoded": false
     };
 
     callback(null, response);
-  }).catch(error => {
-    callback(error);
-  })
   // serverlessExpress.proxy(server, event, callback)
 };
