@@ -98,7 +98,7 @@ function Search(){
     
     fetch(`${ process.env.REACT_APP_API }/test`)
     .then(response => response.json())
-    .then(res => console.log(res.body))
+    .then(res => console.log(res.body[0]))
     .catch(err => console.log(err));
 
     fetch(`${ process.env.REACT_APP_API }/lalala`)
