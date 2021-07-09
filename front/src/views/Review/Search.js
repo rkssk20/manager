@@ -91,7 +91,17 @@ function Search(){
   const placeholder = 'レビューしたい作品を検索！';
 
   useEffect(() => {
-    fetch(`${ process.env.REACT_APP_API }`)
+    fetch(`${ process.env.REACT_APP_API }/api`)
+    .then(response => response.text())
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
+    
+    fetch(`${ process.env.REACT_APP_API }/test`)
+    .then(response => response.text())
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
+
+    fetch(`${ process.env.REACT_APP_API }/lalala`)
     .then(response => response.text())
     .then(res => console.log(res))
     .catch(err => console.log(err));

@@ -79,10 +79,26 @@ var pool = mysql.createPool({
 
 global.pool = pool;
 
-app.get('/', function(req, res){
+app.get('/api', (req, res) => {
+  res.send({
+    "statusCode": 200,
+    "body": 'lalala'
+  });
+});
+
+app.get('/test', (req, res) => {
   res.send({
     "statusCode": 200,
     "body": JSON.stringify('lalala')
+  });
+});
+
+app.get('/lalala', (req, res) => {
+  pool.query('SELECT * FROM works', function(error, result){
+    res.send({
+      "statusCode": 200,
+      "body": JSON.stringify(result)
+    });
   });
 });
 
