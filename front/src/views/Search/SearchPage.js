@@ -155,13 +155,13 @@ function SearchPage(){
     <>
       <Form setSearchSubmit={ setSearchSubmit } placeholder={ placeholder } />
 
-      {
+      {/* {
         searchSubmit ?
         <Result searchSubmit={ searchSubmit } /> :
         resultList ?
         <UserRanking user={ resultList.user } margin={ true } /> :
         <CircleProgress />
-      }
+      } */}
     </>
   );
 };

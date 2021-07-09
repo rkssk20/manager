@@ -32,12 +32,12 @@ function RankingPage(){
         </Typography>
       </div>
 
-      <WorkRanking work={ resultList.work } />
+      {/* <WorkRanking work={ resultList.work } />
       <Divider />
       <WorkRanking work={ resultList.like } like={ true } />
       <Divider />
       <UserRanking user={ resultList.user } />
-      <Divider />
+      <Divider /> */}
     </>
     : <CircularProgress />
   );

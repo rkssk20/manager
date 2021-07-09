@@ -94,13 +94,13 @@ function Search(){
     <>
       <Form setSearchSubmit={ setSearchSubmit } placeholder={ placeholder } />
 
-      {
+      {/* {
         searchSubmit ?
         <Result searchSubmit={ searchSubmit } /> :
         resultList ?
         <WorkRanking work={ resultList.work } margin={ true } /> :
         <CircleProgress />
-      }
+      } */}
     </>
   );
 };

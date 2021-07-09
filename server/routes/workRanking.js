@@ -5,50 +5,84 @@ var router = express.Router();
 // 一週間以内の投稿が3件未満の場合、さらに一週間前から取得。これを3件たまるまで繰り返す。
 router.get('/', async function(req, res){
 
-  const resultList = [];
-  let day = 0;
-  const promisePool = pool.promise();
-
-  try{
-    function Query(){
-      async function Loop(){      
-        const [rows, fields] = await promisePool.query(
-          `SELECT
-            works.work_id,
-            works.title,
-            works.genru,
-            works.name,
-            works.image,
-            COUNT(*) AS COUNT
-          FROM reviews          
-          INNER JOIN works ON reviews.work_id = works.work_id
-          WHERE reviews.created_at BETWEEN NOW() - INTERVAL ${ day + 7 } DAY AND NOW() - INTERVAL ${ day } DAY
-          GROUP BY reviews.work_id
-          ORDER BY COUNT DESC
-          LIMIT 3`
-        );
-
-        await resultList.push(rows);
-        return rows.length;
-      };
-
-      Loop().then((result) => {
-        if(result < 3){
-          day = day + 7;
-          Query();
-        }else{
-          res.send({
-            "statusCode": 200,
-            "body": JSON.stringify(...resultList)
-          });
-        }
-      });
+  pool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1', function(error, result){
+    if(error){
+      console.log(error);
+      throw error;
     };
 
-    Query();
-  }catch(error){
-    console.log(error);
-  }
+    pool.query(
+      `SELECT
+        works.work_id,
+        works.title,
+        works.genru,
+        works.name,
+        works.image,
+        COUNT(*) AS COUNT
+      FROM reviews          
+      INNER JOIN works ON reviews.work_id = works.work_id
+      WHERE reviews.created_at ${ result[0] } AND ${ result[0] } - INTERVAL 7 DAY
+      GROUP BY reviews.work_id
+      ORDER BY COUNT DESC
+      LIMIT 3`,
+      function(err, res){
+        if(err){
+          console.log(err);
+          throw err;
+        };
+
+        res.send({
+          "statusCode": 200,
+          "body": JSON.stringify(result)
+        });
+      }
+    )
+  });
+
+  // const resultList = [];
+  // let day = 0;
+  // const promisePool = pool.promise();
+
+  // try{
+  //   function Query(){
+  //     async function Loop(){      
+  //       const [rows, fields] = await promisePool.query(
+  //         `SELECT
+  //           works.work_id,
+  //           works.title,
+  //           works.genru,
+  //           works.name,
+  //           works.image,
+  //           COUNT(*) AS COUNT
+  //         FROM reviews          
+  //         INNER JOIN works ON reviews.work_id = works.work_id
+  //         WHERE reviews.created_at BETWEEN NOW() - INTERVAL ${ day + 7 } DAY AND NOW() - INTERVAL ${ day } DAY
+  //         GROUP BY reviews.work_id
+  //         ORDER BY COUNT DESC
+  //         LIMIT 3`
+  //       );
+
+  //       await resultList.push(rows);
+  //       return rows.length;
+  //     };
+
+  //     Loop().then((result) => {
+  //       if(result < 3){
+  //         day = day + 7;
+  //         Query();
+  //       }else{
+  //         res.send({
+  //           "statusCode": 200,
+  //           "body": JSON.stringify(...resultList)
+  //         });
+  //       }
+  //     });
+  //   };
+
+  //   Query();
+  // }catch(error){
+  //   console.log(error);
+  // }
 });
 
 module.exports = router;
