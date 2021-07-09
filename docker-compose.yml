@@ -1,20 +1,20 @@
 version: '3'
 services:
   # 開発環境DB
-  # db:
-  #   image: mysql:5.7
-  #   # 日本語化
-  #   command:
-  #     - mysqld
-  #     - --character-set-server=utf8mb4 
-  #     - --collation-server=utf8mb4_unicode_ci
-  #   volumes:
-  #     - db:/var/lib/mysql
-  #   hostname: $MYSQL_HOST
-  #   environment:
-  #     MYSQL_DATABASE: $MYSQL_DATABASE
-  #     MYSQL_ROOT_PASSWORD: $MYSQL_PASSWORD
-  #     MYSQL_USER: $MYSQL_USER
+  db:
+    image: mysql:5.7
+    # 日本語化
+    command:
+      - mysqld
+      - --character-set-server=utf8mb4 
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - db:/var/lib/mysql
+    hostname: $MYSQL_HOST
+    environment:
+      MYSQL_DATABASE: $MYSQL_DATABASE
+      MYSQL_ROOT_PASSWORD: $MYSQL_PASSWORD
+      MYSQL_USER: $MYSQL_USER
 
   app:
     build: ./front
@@ -41,5 +41,5 @@ services:
     ports:
       - '3100:3100'
 
-# volumes: 
-#   db:
+volumes:
+  db:
