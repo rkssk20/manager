@@ -1,5 +1,5 @@
 import { useState } from 'react';
-// import useUserRanking from '../../hooks/useUserRanking';
+import useUserRanking from '../../hooks/useUserRanking';
 import useAccount from '../../hooks/useAccount';
 import UserRanking from '../Ranking/UserRanking';
 import Form from '../../Atoms/Form';
@@ -147,8 +147,7 @@ function Result(props){
 };
 
 function SearchPage(){
-  // const resultList = useUserRanking();
-  const resultList = null;
+  const resultList = useUserRanking();
   const [searchSubmit, setSearchSubmit] = useState('');
   const placeholder = '作品名、またはアカウント名で検索！';
 

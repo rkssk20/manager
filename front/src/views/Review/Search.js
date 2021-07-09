@@ -1,5 +1,5 @@
 import { useState } from 'react';
-// import useWorkRanking from '../../hooks/useWorkRanking';
+import useWorkRanking from '../../hooks/useWorkRanking';
 import Form from '../../Atoms/Form';
 import WorkRanking from '../Ranking/WorkRanking';
 import ButtonTab from '../../Atoms/ButtonTabs';
@@ -86,8 +86,7 @@ function Result(props){
 };
 
 function Search(){
-  // const resultList = useWorkRanking();
-  const resultList = null;
+  const resultList = useWorkRanking();
   const [searchSubmit, setSearchSubmit] = useState('');
   const placeholder = 'レビューしたい作品を検索！'
 

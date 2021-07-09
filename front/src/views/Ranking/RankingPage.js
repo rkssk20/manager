@@ -1,4 +1,4 @@
-// import useRanking from '../../hooks/useRanking';
+import useRanking from '../../hooks/useRanking';
 import WorkRanking from './WorkRanking';
 import UserRanking from './UserRanking';
 
@@ -20,8 +20,7 @@ const intro ={
 };
 
 function RankingPage(){
-  // const resultList = useRanking();
-  const resultList = null;
+  const resultList = useRanking();
 
   return(
     resultList ?
