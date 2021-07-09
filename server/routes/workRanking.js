@@ -11,32 +11,32 @@ router.get('/', async function(req, res){
       throw error;
     };
 
-    pool.query(
-      `SELECT
-        works.work_id,
-        works.title,
-        works.genru,
-        works.name,
-        works.image,
-        COUNT(*) AS COUNT
-      FROM reviews          
-      INNER JOIN works ON reviews.work_id = works.work_id
-      WHERE reviews.created_at ${ result[0] } AND ${ result[0] } - INTERVAL 7 DAY
-      GROUP BY reviews.work_id
-      ORDER BY COUNT DESC
-      LIMIT 3`,
-      function(err, res){
-        if(err){
-          console.log(err);
-          throw err;
-        };
+    // pool.query(
+    //   `SELECT
+    //     works.work_id,
+    //     works.title,
+    //     works.genru,
+    //     works.name,
+    //     works.image,
+    //     COUNT(*) AS COUNT
+    //   FROM reviews          
+    //   INNER JOIN works ON reviews.work_id = works.work_id
+    //   WHERE reviews.created_at ${ result[0] } AND ${ result[0] } - INTERVAL 7 DAY
+    //   GROUP BY reviews.work_id
+    //   ORDER BY COUNT DESC
+    //   LIMIT 3`,
+    //   function(err, res){
+    //     if(err){
+    //       console.log(err);
+    //       throw err;
+    //     };
 
-        res.send({
-          "statusCode": 200,
-          "body": JSON.stringify(result)
-        });
-      }
-    )
+    //     res.send({
+    //       "statusCode": 200,
+    //       "body": JSON.stringify(result)
+    //     });
+    //   }
+    // )
   });
 
   // const resultList = [];
