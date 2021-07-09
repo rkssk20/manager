@@ -93,17 +93,17 @@ function Search(){
   useEffect(() => {
     fetch(`${ process.env.REACT_APP_API }/api`)
     .then(response => response.text())
-    .then(res => console.log(res))
+    .then(res => console.log(res.body))
     .catch(err => console.log(err));
     
     fetch(`${ process.env.REACT_APP_API }/test`)
     .then(response => response.json())
-    .then(res => console.log(res))
+    .then(res => console.log(res.body))
     .catch(err => console.log(err));
 
     fetch(`${ process.env.REACT_APP_API }/lalala`)
     .then(response => response.json())
-    .then(res => console.log(res))
+    .then(res => console.log(res.body))
     .catch(err => console.log(err));
   }, []);
 

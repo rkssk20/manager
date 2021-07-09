@@ -82,7 +82,7 @@ global.pool = pool;
 app.get('/api', (req, res) => {
   res.send({
     "statusCode": 200,
-    "body": 'lalala'
+    "body": JSON.stringify('lalala')
   });
 });
 
