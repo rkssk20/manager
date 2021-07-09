@@ -1,10 +1,10 @@
 import useRanking from '../../hooks/useRanking';
-import WorkRanking from './WorkRanking';
-import UserRanking from './UserRanking';
+// import WorkRanking from './WorkRanking';
+// import UserRanking from './UserRanking';
 
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
+// import Divider from '@material-ui/core/Divider';
 
 const back = {
   width: 'calc(100% - 30px)',

@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import useWorkRanking from '../../hooks/useWorkRanking';
+// import useWorkRanking from '../../hooks/useWorkRanking';
 import Form from '../../Atoms/Form';
-import WorkRanking from '../Ranking/WorkRanking';
+// import WorkRanking from '../Ranking/WorkRanking';
 import ButtonTab from '../../Atoms/ButtonTabs';
 import Movie from '../../components/Review/Movie';
 import Music from '../../components/Review/Music';
@@ -86,8 +86,8 @@ function Result(props){
 };
 
 function Search(){
-  const resultList = useWorkRanking();
-  const [searchSubmit, setSearchSubmit] = useState('');
+  // const resultList = useWorkRanking();
+  // const [searchSubmit, setSearchSubmit] = useState('');
   const placeholder = 'レビューしたい作品を検索！'
 
   return(

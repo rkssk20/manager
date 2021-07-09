@@ -50,40 +50,40 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
-  server:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@main
+  # server:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@main
 
-      - name: Install Dependencies
-        run: npm install
-        working-directory: ./server
+  #     - name: Install Dependencies
+  #       run: npm install
+  #       working-directory: ./server
     
-      # serverless-dotenvに使用する.envの作成
-      - name: Create env
-        run: |
-          touch .env
-          echo "MYSQL_HOST=${{ secrets.MYSQL_HOST }}" >> .env
-          echo "MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" >> .env
-          echo "MYSQL_USER=${{ secrets.MYSQL_USER }}" >> .env
-          echo "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}" >> .env
-          echo "ACCESS_KEY_ID=${{ secrets.ACCESS_KEY_ID }}" >> .env
-          echo "SECRET_ACCESS_KEY=${{ secrets.SECRET_ACCESS_KEY }}" >> .env
-          echo "BUCKET=${{ secrets.BUCKET }}" >> .env
-          echo "SECRET_ACCESS_KEY=${{ secrets.SECRET_ACCESS_KEY }}" >> .env
-          echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" >> .env
-          echo "CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}" >> .env
-          echo "SECRET_ACCESS_KEY=${{ secrets.SECRET_ACCESS_KEY }}" >> .env
-        working-directory: ./server
+  #     # serverless-dotenvに使用する.envの作成
+  #     - name: Create env
+  #       run: |
+  #         touch .env
+  #         echo "MYSQL_HOST=${{ secrets.MYSQL_HOST }}" >> .env
+  #         echo "MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" >> .env
+  #         echo "MYSQL_USER=${{ secrets.MYSQL_USER }}" >> .env
+  #         echo "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}" >> .env
+  #         echo "ACCESS_KEY_ID=${{ secrets.ACCESS_KEY_ID }}" >> .env
+  #         echo "SECRET_ACCESS_KEY=${{ secrets.SECRET_ACCESS_KEY }}" >> .env
+  #         echo "BUCKET=${{ secrets.BUCKET }}" >> .env
+  #         echo "SECRET_ACCESS_KEY=${{ secrets.SECRET_ACCESS_KEY }}" >> .env
+  #         echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" >> .env
+  #         echo "CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}" >> .env
+  #         echo "SECRET_ACCESS_KEY=${{ secrets.SECRET_ACCESS_KEY }}" >> .env
+  #       working-directory: ./server
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-northeast-1
+  #     - name: Configure AWS Credentials
+  #       uses: aws-actions/configure-aws-credentials@v1
+  #       with:
+  #         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #         aws-region: ap-northeast-1
 
-      - name: Build
-        run: npx serverless deploy
-        working-directory: ./server
+  #     - name: Build
+  #       run: npx serverless deploy
+  #       working-directory: ./server
