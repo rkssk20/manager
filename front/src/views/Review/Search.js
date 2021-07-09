@@ -97,12 +97,12 @@ function Search(){
     .catch(err => console.log(err));
     
     fetch(`${ process.env.REACT_APP_API }/test`)
-    .then(response => response.text())
+    .then(response => response.json())
     .then(res => console.log(res))
     .catch(err => console.log(err));
 
     fetch(`${ process.env.REACT_APP_API }/lalala`)
-    .then(response => response.text())
+    .then(response => response.json())
     .then(res => console.log(res))
     .catch(err => console.log(err));
   }, []);
