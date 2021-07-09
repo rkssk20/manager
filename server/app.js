@@ -82,14 +82,14 @@ global.pool = pool;
 app.get('/api', (req, res) => {
   res.send({
     "statusCode": 200,
-    "body": JSON.stringify('lalala')
+    "body": JSON.parse('lalala')
   });
 });
 
 app.get('/test', (req, res) => {
   res.send({
     "statusCode": 200,
-    "body": JSON.stringify('lalala')
+    "body": JSON.parse('lalala')
   });
 });
 
@@ -97,7 +97,7 @@ app.get('/lalala', (req, res) => {
   pool.query('SELECT * FROM works', function(error, result){
     res.send({
       "statusCode": 200,
-      "body": JSON.stringify(result)
+      "body": JSON.parse(result)
     });
   });
 });
