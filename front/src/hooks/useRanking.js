@@ -7,7 +7,7 @@ function useRanking(){
     const REACT_APP_API = process.env.REACT_APP_API;
 
     fetch(`${ REACT_APP_API }/workRanking`)
-    .then(response => response.json())
+    .then(response => response.text())
     .then(result => {
       console.log(result)
       setResultList(result)
