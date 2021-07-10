@@ -9,7 +9,7 @@ router.get('/', async function(req, res){
 
   res.send({
     "statusCode": 200,
-    "body": rows
+    "body": rows[0].created_at
   })
 
   // promisePool.query(`SELECT * FROM reviews WHERE created_at='${ rows[0].created_at }'`, function(error, result){
