@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 function useRanking(){
   const [resultList, setResultList] = useState(null);
