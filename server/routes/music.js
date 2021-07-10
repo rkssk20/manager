@@ -6,58 +6,52 @@ const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
 // spotify api
-router.post('/', async function(req, res) {
-  var SpotifyApi = await new SpotifyWebApi({
+router.post('/', function(req, res) {
+  var SpotifyApi = new SpotifyWebApi({
     clientId: CLIENT_ID,
     clientSecret: CLIENT_SECRET
   });
   
-  await SpotifyApi.clientCredentialsGrant().then(
-    function(data){
-      res.send({
-        "statusCode": 200,
-        "body": data
-      });
-      
-      SpotifyApi.setAccessToken(data.body['access_token']);
-    },
-  );
+  SpotifyApi.clientCredentialsGrant(function(error, data){
+    SpotifyApi.setAccessToken(data.body['access_token']);
+  });
 
   // 検索で10件取得
-  // if(req.body.submit){
-  //   SpotifyApi.searchTracks(req.body.submit, { limit: 10, country: 'JP' })
-  //   .then(function(data){
-    //   const resultList = [];
-    //   var number;
+  if(req.body.submit){
+    SpotifyApi.searchTracks(req.body.submit, { limit: 10, country: 'JP' }, function(error, data){
 
-    //   if(data.body.tracks.items.length === 0){
-    //     resultList.push('empty');
-    //   }else{
-    //     number = data.body.tracks.items.length;
-    //   }
+    // .then(function(data){
+      const resultList = [];
+      var number;
 
-    //   for(let i = 0; i < number; i++){
-    //     const nameList = [];
+      if(data.body.tracks.items.length === 0){
+        resultList.push('empty');
+      }else{
+        number = data.body.tracks.items.length;
+      }
 
-    //     data.body.tracks.items[i].artists.forEach(item => {
-    //       nameList.push(item.name);
-    //     });
+      for(let i = 0; i < number; i++){
+        const nameList = [];
 
-    //     resultList.push({
-    //       id: data.body.tracks.items[i].id,
-    //       image: data.body.tracks.items[i].album.images[0].url,
-    //       title: data.body.tracks.items[i].name,
-    //       name:  nameList.join(','),
-    //       date: data.body.tracks.items[i].album.release_date
-    //     });
-    //   };
+        data.body.tracks.items[i].artists.forEach(item => {
+          nameList.push(item.name);
+        });
 
-    //   res.send({
-    //     "statusCode": 200,
-    //     "body": resultList
-    //   });
-  //   });
-  // }
+        resultList.push({
+          id: data.body.tracks.items[i].id,
+          image: data.body.tracks.items[i].album.images[0].url,
+          title: data.body.tracks.items[i].name,
+          name:  nameList.join(','),
+          date: data.body.tracks.items[i].album.release_date
+        });
+      };
+
+      res.send({
+        "statusCode": 200,
+        "body": resultList
+      });
+    });
+  }
   
   // ID指定で取得
   if(req.body.id){
