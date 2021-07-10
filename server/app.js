@@ -86,14 +86,18 @@ app.get('/api', (req, res) => {
   });
 });
 
-app.get('/lalala', async (req, res) => {
-  const rows = await pool.query('SELECT * FROM reviews')
-
-  const aaa = await pool.query('SELECT * FROM works');
-
+app.get('/lalala', (req, res) => {
+  // pool.query('SELECT * FROM works', function (error, result){
+  //   pool.query(`SELECT * FROM reviews WHERE review_id=${  }`, function(error, response){
+  //     res.send({
+  //       "statusCode": 200,
+  //       "body": response
+  //     });
+  //   });
+  // })
   res.send({
     "statusCode": 200,
-    "body": rows.length + aaa.length
+    "body": 'lalala'
   });
 });
 
