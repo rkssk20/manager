@@ -24,6 +24,7 @@ router.get('/', function(req, res){
       ORDER BY COUNT DESC
       LIMIT 3`
     )
+    .promise()
     .then((result) => {
       res.send({
         "statusCode": 200,
