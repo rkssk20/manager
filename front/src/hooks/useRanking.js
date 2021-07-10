@@ -1,14 +1,18 @@
 import { useEffect } from 'react';
 
 function useRanking(){
-  // const [resultList, setResultList] = useState(null);
+  const [resultList, setResultList] = useState(null);
 
   useEffect(() => {
+    const REACT_APP_API = process.env.REACT_APP_API;
+
     fetch(`${ REACT_APP_API }/workRanking`)
     .then(response => response.json())
-    .then(result => console.log(result))
+    .then(result => {
+      console.log(result)
+      setResultList(result)
+    })
     .catch(err => console.log(err));
-  //   const REACT_APP_API = process.env.REACT_APP_API;
 
   //   const work = fetch(`${ REACT_APP_API }/workRanking`).then(response => response.json()).then(result => result);
   //   const like = fetch(`${ REACT_APP_API }/likeRanking`).then(response => response.json()).then(result => result.body);
