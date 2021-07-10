@@ -14,7 +14,7 @@ function Music(searchSubmit, searchGenru){
       headers : new Headers({ "Content-type" : "application/json" })
     })
     .then(response => response.json())
-    .then(data => setSearchItem(data));
+    .then(data => setSearchItem(data.body));
 
     }, [searchSubmit, searchGenru]);
 

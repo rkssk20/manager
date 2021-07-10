@@ -34,10 +34,18 @@ router.post('/', function(req, res){
   pool.query(sql, function(err, result){
     if(err) throw err;
 
+    console.log(result)
+
     if(result.length !== 0){
-      res.send(result);
+      res.send({
+        "statusCode": 200,
+        "body": result
+      });
     }else{
-      res.send(['empty']);
+      res.send({
+        "statusCode": 200,
+        "body": ['empty']
+      });
     }
   });
 });

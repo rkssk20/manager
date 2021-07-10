@@ -1,5 +1,4 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import { useLocation } from 'react-router-dom';
 
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import Dialog from '@material-ui/core/Dialog';
@@ -47,25 +46,14 @@ const text = {
 
 function Login(){
   const { loginWithRedirect } = useAuth0();
-  const location = useLocation();
   const classes = useStyles();
 
   const authLogin = () => {
-    let path;
-  
-    switch(location.pathname){
-      case '/account/':
-        path = '/';
-        break;
-      default:
-        path = '/';
-    };
-
     loginWithRedirect({
       // 開発環境
-      // redirectUri: `http://localhost:3000${ path }`
+      // redirectUri: 'http://localhost:3000/'
       // 本番環境
-      redirectUri: `https://www.audience.cf${ path }`
+      redirectUri: 'https://www.audience.cf/'
     });
   };
 
