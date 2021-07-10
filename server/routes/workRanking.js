@@ -9,7 +9,7 @@ router.get('/', function(req, res){
 
     const [response] = await promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1');
 
-    const [result] = await promisePool.query(
+    const [result] = promisePool.query(
       `SELECT
         works.work_id,
         works.title,
@@ -23,12 +23,13 @@ router.get('/', function(req, res){
       GROUP BY reviews.work_id
       ORDER BY COUNT DESC
       LIMIT 3`
-    );
-
-    res.send({
-      "statusCode": 200,
-      "body": result
-    });
+    )
+    .then((result) => {
+      res.send({
+        "statusCode": 200,
+        "body": result
+      });
+    })
   };
 
   Query();
