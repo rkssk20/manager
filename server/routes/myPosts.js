@@ -34,10 +34,7 @@ router.post('/', function(req, res){
     function(error, result){
       if(error) throw error;
 
-      res.send({
-        "statusCode": 200,
-        "body": result
-      });
+      res.send(result);
     }
   );
 });
