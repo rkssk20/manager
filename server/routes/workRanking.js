@@ -22,7 +22,7 @@ router.get('/', function(req, res){
 
         res.send({
           "statusCode": 200,
-          "body": result
+          "body": res
         });
       }
     );
