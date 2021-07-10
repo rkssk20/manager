@@ -15,7 +15,7 @@ router.get('/', function(req, res){
         COUNT(*) AS COUNT
       FROM reviews          
       INNER JOIN works ON reviews.work_id = works.work_id
-      WHERE created_at BETWEEN ${ response[0].created_at } - INTERVAL 7 DAY AND ${ response[0].created_at }
+      WHERE reviews.created_at BETWEEN ${ response[0].created_at } - INTERVAL 7 DAY AND ${ response[0].created_at }
       GROUP BY reviews.work_id
       ORDER BY COUNT DESC
       LIMIT 3`, function(error, result){
