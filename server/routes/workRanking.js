@@ -7,7 +7,7 @@ router.get('/', function(req, res){
     
     res.send({
       "statusCode": 200,
-      "body": result[0]
+      "body": result[0].created_at
     })
     // pool.query(
     //   `SELECT

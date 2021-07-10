@@ -22,37 +22,39 @@ router.post('/', async function(req, res) {
   if(req.body.submit){
     SpotifyApi.searchTracks(req.body.submit, { limit: 10, country: 'JP' })
     .then(function(data){
-      const resultList = [];
-      var number;
-
-      console.log(data)
-
-      if(data.body.tracks.items.length === 0){
-        resultList.push('empty');
-      }else{
-        number = data.body.tracks.items.length;
-      }
-
-      for(let i = 0; i < number; i++){
-        const nameList = [];
-
-        data.body.tracks.items[i].artists.forEach(item => {
-          nameList.push(item.name);
-        });
-
-        resultList.push({
-          id: data.body.tracks.items[i].id,
-          image: data.body.tracks.items[i].album.images[0].url,
-          title: data.body.tracks.items[i].name,
-          name:  nameList.join(','),
-          date: data.body.tracks.items[i].album.release_date
-        });
-      };
-
       res.send({
         "statusCode": 200,
-        "body": resultList
+        "body": data
       });
+    //   const resultList = [];
+    //   var number;
+
+    //   if(data.body.tracks.items.length === 0){
+    //     resultList.push('empty');
+    //   }else{
+    //     number = data.body.tracks.items.length;
+    //   }
+
+    //   for(let i = 0; i < number; i++){
+    //     const nameList = [];
+
+    //     data.body.tracks.items[i].artists.forEach(item => {
+    //       nameList.push(item.name);
+    //     });
+
+    //     resultList.push({
+    //       id: data.body.tracks.items[i].id,
+    //       image: data.body.tracks.items[i].album.images[0].url,
+    //       title: data.body.tracks.items[i].name,
+    //       name:  nameList.join(','),
+    //       date: data.body.tracks.items[i].album.release_date
+    //     });
+    //   };
+
+    //   res.send({
+    //     "statusCode": 200,
+    //     "body": resultList
+    //   });
     });
   }
   
