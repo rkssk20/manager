@@ -5,8 +5,13 @@ var router = express.Router();
 router.get('/', async function(req, res){
   const promisePool = pool.promise();
 
-  promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1')
-  .then(response => {
+  function Query(){
+    const [rows, fields] = await promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1');
+
+    return rows;
+  };
+
+  Query().then(response => {
     promisePool.query(
       `SELECT
         works.work_id,
@@ -21,13 +26,13 @@ router.get('/', async function(req, res){
       GROUP BY reviews.work_id
       ORDER BY COUNT DESC
       LIMIT 3`, function(error, result){
-
+        
         res.send({
           "statusCode": 200,
           "body": result
         });
       }
-    )
+    );
   });
 });
 
