@@ -34,7 +34,7 @@ router.post('/', function(req, res){
   pool.query(sql, function(err, result){
     if(err) throw err;
 
-    console.log(result)
+    console.log(result);
 
     if(result.length !== 0){
       res.send({

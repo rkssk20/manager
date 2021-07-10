@@ -20,7 +20,10 @@ function useLogin(){
         headers : new Headers({ "Content-type" : "application/json" })
       })
       .then(response => response.json())
-      .then(result => setUserData(result[0]))
+      .then(result => {
+        console.log(result)
+        setUserData(result[0])
+      })
       .catch(() => { setUserData('empty') });
       
     }else{
