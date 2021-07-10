@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 // ユーザーデータ
-router.post('/', async function(req, res){
+router.post('/', function(req, res){
   let sql;
 
   if(req.body.myAccount){

@@ -79,16 +79,16 @@ var pool = mysql.createPool({
 
 global.pool = pool;
 
-app.get('/api', async (req, res) => {
-  callback(null, {
+app.get('/api', (req, res) => {
+  res.send({
     "statusCode": 200,
     "body": 'lalala'
   });
 });
 
-app.get('/lalala', async (req, res) => {
+app.get('/lalala', (req, res) => {
   pool.query('SELECT * FROM works', function(error, result){
-    callback(null, {
+    res.send({
       "statusCode": 200,
       "body": result
     });
