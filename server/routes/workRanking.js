@@ -4,11 +4,11 @@ var router = express.Router();
 // 最新の投稿から一週間以内で、多くレビューされた作品TOP3を取得
 router.get('/', function(req, res){
   const promisePool = pool.promise();
-  
-  pool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1')
+
+  promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1')
   .promise()
   .then((response) => {
-    pool.query(`SELECT * FROM reviews WHERE created_at='${ response[0].created_at }'`, function(error, result){
+    promisePool.query(`SELECT * FROM reviews WHERE created_at='${ response[0].created_at }'`, function(error, result){
       res.send({
         "statusCode": 200,
         "body": result
