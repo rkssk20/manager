@@ -14,7 +14,7 @@ router.get('/', async function(req, res){
 
     res.send({
       "statusCode": 200,
-      "body": JSON.stringify(result[0])
+      "body": result[0]
     });
   });
 });
