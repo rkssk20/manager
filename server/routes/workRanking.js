@@ -9,7 +9,7 @@ router.get('/', function(req, res){
 
     const [response] = await promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1');
 
-    const [result] = promisePool.query(
+    promisePool.query(
       `SELECT
         works.work_id,
         works.title,
