@@ -21,11 +21,12 @@ function useMyPost(accountData, page){
     })
     .then(response => response.json())
     .then(result => {
+      console.log(result)
       // 0ページ目は初期化、それ以降は末尾に追加していく
       if(page === 0){
-        setPostData(result);
+        setPostData(result.body);
       }else{
-        setPostData((prev) => [...prev, ...result]);
+        setPostData((prev) => [...prev, ...result.body]);
       };
 
       (result.length === 0) && setHasMore(false);
