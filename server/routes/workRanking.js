@@ -10,8 +10,6 @@ router.get('/', async function(req, res){
       throw error;
     };
 
-    
-
     res.send({
       "statusCode": 200,
       "body": result
