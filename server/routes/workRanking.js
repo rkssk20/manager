@@ -18,11 +18,11 @@ router.get('/', function(req, res){
       WHERE created_at BETWEEN '${ result[0] }' - INTERVAL 7 DAY AND '${ result[0] }'
       GROUP BY reviews.work_id
       ORDER BY COUNT DESC
-      LIMIT 3`, function(err, res){
+      LIMIT 3`, function(error, result){
 
         res.send({
           "statusCode": 200,
-          "body": res
+          "body": result
         });
       }
     );
