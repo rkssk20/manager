@@ -14,18 +14,19 @@ router.post('/', async function(req, res) {
   
   await SpotifyApi.clientCredentialsGrant().then(
     function(data){
+      res.send({
+        "statusCode": 200,
+        "body": data
+      });
+      
       SpotifyApi.setAccessToken(data.body['access_token']);
     },
   );
 
   // 検索で10件取得
-  if(req.body.submit){
-    SpotifyApi.searchTracks(req.body.submit, { limit: 10, country: 'JP' })
-    .then(function(data){
-      res.send({
-        "statusCode": 200,
-        "body": data
-      });
+  // if(req.body.submit){
+  //   SpotifyApi.searchTracks(req.body.submit, { limit: 10, country: 'JP' })
+  //   .then(function(data){
     //   const resultList = [];
     //   var number;
 
@@ -55,8 +56,8 @@ router.post('/', async function(req, res) {
     //     "statusCode": 200,
     //     "body": resultList
     //   });
-    });
-  }
+  //   });
+  // }
   
   // ID指定で取得
   if(req.body.id){
