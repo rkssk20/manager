@@ -3,4 +3,4 @@ const app = require('./app');
 
 const server = serverlessExpress.createServer(app);
 
-exports.handler = (event, context) => serverlessExpress.proxy(server, event, context);
+exports.handler = async(event, context) => serverlessExpress.proxy(server, event, context, 'PROMISE').promise;
