@@ -7,12 +7,17 @@ router.get('/', async function(req, res){
 
   const [rows] = await promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1');
 
-  promisePool.query(`SELECT * FROM reviews WHERE created_at='${ rows[0].created_at }'`, function(error, result){
-    res.send({
-      "statusCode": 200,
-      "body": result
-    })
+  res.send({
+    "statusCode": 200,
+    "body": rows
   })
+
+  // promisePool.query(`SELECT * FROM reviews WHERE created_at='${ rows[0].created_at }'`, function(error, result){
+  //   res.send({
+  //     "statusCode": 200,
+  //     "body": result
+  //   })
+  // })
 
 
   // .promise()
