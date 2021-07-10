@@ -16,7 +16,7 @@ var profileRouter = require('./routes/profile');
 var musicRouter = require('./routes/music');
 // var postsRouter = require('./routes/posts');
 var myPostsRouter = require('./routes/myPosts');
-// var workPostsRouter = require('./routes/workPosts');
+var workPostsRouter = require('./routes/workPosts');
 // var averageRouter = require('./routes/average');
 // var likeRouter = require('./routes/like');
 // var unLikeRouter = require('./routes/unLike');
@@ -56,7 +56,7 @@ app.use('/music', musicRouter);
 // app.use('/posts', postsRouter);
 app.use('/myPosts', myPostsRouter);
 // app.use('/average', averageRouter);
-// app.use('/workPosts', workPostsRouter);
+app.use('/workPosts', workPostsRouter);
 // app.use('/favorites', favoritesRouter);
 // app.use('/setting', settingRouter);
 // app.use('/delete', deleteRouter);
@@ -86,12 +86,14 @@ app.get('/api', (req, res) => {
   });
 });
 
-app.get('/lalala', (req, res) => {
-  pool.query('SELECT * FROM works', function(error, result){
-    res.send({
-      "statusCode": 200,
-      "body": result
-    });
+app.get('/lalala', async (req, res) => {
+  const rows = await pool.query('SELECT * FROM reviews')
+
+  const aaa = await pool.query('SELECT * FROM works');
+
+  res.send({
+    "statusCode": 200,
+    "body": rows.length + aaa.length
   });
 });
 
