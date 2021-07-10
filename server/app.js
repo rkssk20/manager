@@ -25,7 +25,7 @@ var musicRouter = require('./routes/music');
 // var iconRouter = require('./routes/icon');
 // var favoritesRouter = require('./routes/favorites');
 // var workRouter = require('./routes/work');
-// var workRankingRouter = require('./routes/workRanking');
+var workRankingRouter = require('./routes/workRanking');
 // var likeRankingRouter = require('./routes/likeRanking');
 // var userRankingRouter = require('./routes/userRanking');
 
@@ -62,7 +62,7 @@ app.use('/music', musicRouter);
 // app.use('/delete', deleteRouter);
 // app.use('/icon', iconRouter);
 // app.use('/work', workRouter);
-// app.use('/workRanking', workRankingRouter);
+app.use('/workRanking', workRankingRouter);
 // app.use('/likeRanking', likeRankingRouter);
 // app.use('/userRanking', userRankingRouter);
 
