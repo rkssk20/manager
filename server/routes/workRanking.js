@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 // 最新の投稿から一週間以内で、多くレビューされた作品TOP3を取得
-router.get('/', async function(req, res){
+router.get('/', function(req, res){
 
   async function Query(){
     const promisePool = pool.promise();
@@ -25,15 +25,13 @@ router.get('/', async function(req, res){
       LIMIT 3`
     );
 
-    return result;
+    res.send({
+      "statusCode": 200,
+      "body": result
+    });
   };
 
-  const result = await Query();
-
-  res.send({
-    "statusCode": 200,
-    "body": result
-  });
+  Query();
 });
 
 module.exports = router;
