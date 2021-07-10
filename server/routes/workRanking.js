@@ -2,17 +2,12 @@ var express = require('express');
 var router = express.Router();
 
 // 最新の投稿から一週間以内で、多くレビューされた作品TOP3を取得
-router.get('/', function(req, res){
+router.get('/', async function(req, res){
   const promisePool = pool.promise();
 
-  function Query(){
-    const [rows, fields] = await promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1');
-
-    return rows;
-  };
-
-  Query().then(response => {
-    pool.query(
+  promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1')
+  .then(response => {
+    promisePool.query(
       `SELECT
         works.work_id,
         works.title,
@@ -32,7 +27,7 @@ router.get('/', function(req, res){
           "body": result
         });
       }
-    );
+    )
   });
 });
 

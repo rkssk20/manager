@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 function useLogin(){
   const { user, isLoading } = useAuth0();
   const [userData, setUserData] = useState('loading');
-  
+
   useEffect(() => {
     // cookieが存在すればログインしている
     if(document.cookie.includes('auth0.is.authenticated')){
