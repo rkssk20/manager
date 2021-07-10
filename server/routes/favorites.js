@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 // いいねした投稿の取得
-router.post('/', async function(req, res){
+router.post('/', function(req, res){
   const pageNum = req.body.page * 10;
 
   // 表示しているアカウントがいいねした投稿を外部結合で取得。

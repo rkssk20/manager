@@ -6,21 +6,22 @@ const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 
 // spotify api
-router.post('/', function(req, res) {
-  var SpotifyApi = new SpotifyWebApi({
+router.post('/', async function(req, res) {
+  var SpotifyApi = await new SpotifyWebApi({
     clientId: CLIENT_ID,
     clientSecret: CLIENT_SECRET
   });
   
-  SpotifyApi.clientCredentialsGrant(function(error, data){
-    SpotifyApi.setAccessToken(data.body['access_token']);
-  });
+  await SpotifyApi.clientCredentialsGrant().then(
+    function(data) {  
+      SpotifyApi.setAccessToken(data.body['access_token']);
+    },
+  );
 
   // 検索で10件取得
   if(req.body.submit){
-    SpotifyApi.searchTracks(req.body.submit, { limit: 10, country: 'JP' }, function(error, data){
-
-    // .then(function(data){
+    SpotifyApi.searchTracks(req.body.submit, { limit: 10, country: 'JP' })
+    .then(function(data){
       const resultList = [];
       var number;
 
@@ -46,10 +47,7 @@ router.post('/', function(req, res) {
         });
       };
 
-      res.send({
-        "statusCode": 200,
-        "body": resultList
-      });
+      res.send(resultList);
     });
   }
   
@@ -64,16 +62,13 @@ router.post('/', function(req, res) {
       });
 
       res.send({
-        "statusCode": 200,
-        "body": {
-          id: data.body.id,
-          url: data.body.external_urls.spotify,
-          image: data.body.album.images[0].url,
-          poster: '',
-          title: data.body.name,
-          name:  nameList.join(','),
-          date: data.body.album.release_date
-        }
+        id: data.body.id,
+        url: data.body.external_urls.spotify,
+        image: data.body.album.images[0].url,
+        poster: '',
+        title: data.body.name,
+        name:  nameList.join(','),
+        date: data.body.album.release_date
       });
     }); 
   }
