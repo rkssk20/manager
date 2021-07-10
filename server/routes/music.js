@@ -13,7 +13,7 @@ router.post('/', async function(req, res) {
   });
   
   await SpotifyApi.clientCredentialsGrant().then(
-    function(data) {  
+    function(data){
       SpotifyApi.setAccessToken(data.body['access_token']);
     },
   );
@@ -24,6 +24,8 @@ router.post('/', async function(req, res) {
     .then(function(data){
       const resultList = [];
       var number;
+
+      console.log(data)
 
       if(data.body.tracks.items.length === 0){
         resultList.push('empty');
@@ -46,6 +48,8 @@ router.post('/', async function(req, res) {
           date: data.body.tracks.items[i].album.release_date
         });
       };
+
+      console.log(resultList)
 
       res.send({
         "statusCode": 200,

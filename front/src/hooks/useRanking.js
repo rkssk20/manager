@@ -12,6 +12,7 @@ function useRanking(){
 
     Promise.all([work, like, user])
     .then(value => {
+      console.log(value)
       setResultList({work: value[0], like: value[1], user: value[2]});
     });
   }, []);
