@@ -5,11 +5,6 @@ var router = express.Router();
 router.get('/', async function(req, res){
 
   pool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1', function(error, result){
-    if(error){
-      console.log(error);
-      throw error;
-    };
-
     res.send({
       "statusCode": 200,
       "body": result
