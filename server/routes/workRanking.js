@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res){
 
   async function Query(){
-    // const promisePool = pool.promise();
+    const promisePool = pool.promise();
 
     // async function Promise(){
     //   const [response] = await promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1');
