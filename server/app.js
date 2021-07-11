@@ -111,7 +111,7 @@ app.get('/lalala', (req, res) => {
 
           res.send({
             "statusCode": 202,
-            "body": result
+            "body": response
           }
         );
       }
