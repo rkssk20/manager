@@ -52,10 +52,5 @@ functions:
   exampleFunction:
     handler: lambda.handler
     events:
-      - http:
-          path: '/'
-          method: ANY
-      - http:
-          path: '/api/{proxy+}'
-          method: ANY
-          async: true
+      - http: ANY /
+      - http: 'ANY /api/{proxy+}'
