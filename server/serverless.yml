@@ -54,6 +54,6 @@ functions:
     events:
       - http: ANY /
       - http:
-          method: ANY
           path: /api/{proxy+}
+          method: ANY
           async: true
