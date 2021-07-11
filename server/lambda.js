@@ -5,5 +5,5 @@ const server = serverlessExpress.createServer(app);
 
 exports.handler = async (event, context) => {
   
-  return await serverlessExpress.proxy(server, event, context,'PROMISE').promise
+  return await serverlessExpress.proxy(server, event, context)
 };
