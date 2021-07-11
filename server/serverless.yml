@@ -57,7 +57,3 @@ functions:
           method: ANY
           path: /api/{proxy+}
           async: true
-          response:
-            statusCodes:
-              202:
-                pattern: ''
