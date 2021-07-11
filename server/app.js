@@ -73,7 +73,7 @@ var pool = mysql.createPool({
   password: process.env['MYSQL_PASSWORD'],
   database: process.env['MYSQL_DATABASE'],
   waitForConnections: true,
-  // connectionLimit: 10,
+  connectionLimit: 10,
   queueLimit: 0
 });
 
@@ -84,7 +84,7 @@ app.get('/api', (req, res) => {
   pool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1', function(error, result){
     res.send({
       "statusCode": 202,
-      "body": result
+      "body": result[0].created_at
     });
   });
 });
@@ -94,7 +94,7 @@ app.get('/lalala', (req, res) => {
 
   promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1', function(error, response){
 
-    promisePool.query(
+    pool.query(
       `SELECT
           works.work_id,
           works.title,

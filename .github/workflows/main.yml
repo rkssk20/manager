@@ -87,3 +87,12 @@ jobs:
       - name: Build
         run: npx serverless deploy
         working-directory: ./server
+
+      - name: Clear cache in CloudFront
+        uses: chetan/invalidate-cloudfront-action@v1.2
+        env:
+          DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
+          PATHS: "/*"
+          AWS_REGION: ap-northeast-1
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
