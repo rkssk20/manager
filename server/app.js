@@ -107,11 +107,11 @@ app.get('/lalala', (req, res) => {
         WHERE reviews.created_at BETWEEN '${ response[0].created_at }' - INTERVAL 7 DAY AND '${ response[0].created_at }'
         GROUP BY reviews.work_id
         ORDER BY COUNT DESC
-        LIMIT 3`, function(error, result){
+        LIMIT 3`, function(error, result, response){
 
           res.send({
             "statusCode": 202,
-            "body": response
+            "body": response[0].created_at
           }
         );
       }
