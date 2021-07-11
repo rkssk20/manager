@@ -82,7 +82,7 @@ global.pool = pool;
 app.get('/api', (req, res) => {
   pool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1', function(error, result){
     res.send({
-      "statusCode": 200,
+      "statusCode": 202,
       "body": result
     });
   });
@@ -113,7 +113,7 @@ app.get('/lalala', (req, res) => {
         ORDER BY COUNT DESC
         LIMIT 3`, function(error, result){
           res.send({
-            "statusCode": 200,
+            "statusCode": 202,
             "body": result
           })
         ;
