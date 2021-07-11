@@ -53,7 +53,9 @@ functions:
     handler: lambda.handler
     events:
       - http: ANY /
-      - http: 'ANY /api/{proxy+}'
+      - http:
+          method: ANY
+          path: /api/{proxy+}
           async: true
           response:
             statusCodes:
