@@ -114,7 +114,7 @@ app.get('/lalala', async (req, res) => {
 
   const [response, fileds] = await promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1');
 
-  promisePool.query(
+  const [result, filed] = await promisePool.query(
     `SELECT
         works.work_id,
         works.title,
@@ -127,14 +127,13 @@ app.get('/lalala', async (req, res) => {
       WHERE reviews.created_at BETWEEN '${ response[0].created_at }' - INTERVAL 7 DAY AND '${ response[0].created_at }'
       GROUP BY reviews.work_id
       ORDER BY COUNT DESC
-      LIMIT 3`, function(error, result){
-        res.send({
-          "statusCode": 200,
-          "body": result
-        }
-      );
-    }
+      LIMIT 3`
   );
+
+  res.send({
+    "statusCode": 200,
+    "body": result
+  });
 });
 
 // catch 404 and forward to error handler
