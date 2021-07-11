@@ -90,9 +90,9 @@ app.get('/api', (req, res) => {
 });
 
 app.get('/lalala', (req, res) => {
-  const promisePool = pool.promise();
+  // const promisePool = pool.promise();
 
-  promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1', function(error, response){
+  pool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1', function(error, response){
 
     pool.query(
       `SELECT
@@ -108,6 +108,7 @@ app.get('/lalala', (req, res) => {
         GROUP BY reviews.work_id
         ORDER BY COUNT DESC
         LIMIT 3`, function(error, result){
+
           res.send({
             "statusCode": 202,
             "body": result
@@ -116,8 +117,6 @@ app.get('/lalala', (req, res) => {
       }
     );
   });
-
-  return promise;
 });
 
 // catch 404 and forward to error handler

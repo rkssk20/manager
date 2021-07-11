@@ -47,7 +47,10 @@ router.post('/', async function(req, res) {
         });
       };
 
-      res.send(resultList);
+      res.send({
+        "statusCode": 202,
+        "body": resultList
+      });
     });
   }
   
@@ -62,13 +65,16 @@ router.post('/', async function(req, res) {
       });
 
       res.send({
-        id: data.body.id,
-        url: data.body.external_urls.spotify,
-        image: data.body.album.images[0].url,
-        poster: '',
-        title: data.body.name,
-        name:  nameList.join(','),
-        date: data.body.album.release_date
+        "statusCode": 202,
+        "body": {
+          id: data.body.id,
+          url: data.body.external_urls.spotify,
+          image: data.body.album.images[0].url,
+          poster: '',
+          title: data.body.name,
+          name:  nameList.join(','),
+          date: data.body.album.release_date
+        }
       });
     }); 
   }
