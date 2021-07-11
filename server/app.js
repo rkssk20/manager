@@ -92,13 +92,8 @@ app.get('/api', (req, res) => {
 app.get('/lalala', (req, res) => {
   const promisePool = pool.promise();
 
-  let promise = new Promise((resolve, reject) => {
-    promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1', function(error, response){
-      resolve(response)
-    });
-  });
+  promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1', function(error, response){
 
-  promise.then(([response]) => {
     promisePool.query(
       `SELECT
           works.work_id,
@@ -116,8 +111,8 @@ app.get('/lalala', (req, res) => {
           res.send({
             "statusCode": 202,
             "body": result
-          })
-        ;
+          }
+        );
       }
     );
   });
