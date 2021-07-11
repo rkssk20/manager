@@ -15,6 +15,8 @@ var connection = mysql.createConnection({
   database: MYSQL_DATABASE
 });
 
+let response;
+
 connection.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1', function(error, result){
   response = result[0].created_at;
 });
