@@ -55,3 +55,7 @@ functions:
       - http: ANY /
       - http: 'ANY /api/{proxy+}'
           async: true
+          response:
+            statusCodes:
+              202:
+                pattern: ''
