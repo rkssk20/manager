@@ -80,11 +80,25 @@ var pool = mysql.createPool({
 global.pool = pool;
 
 app.get('/api', (req, res) => {
+  pool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1', function(error, result){
+    res.send({
+      "statusCode": 200,
+      "body": result
+    });
+  });
+});
+
+app.get('/lalala', (req, res) => {
   const promisePool = pool.promise();
-  
-  promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1')
-  .then(([response]) => {
-    pool.query(
+
+  let promise = new Promise((resolve, reject) => {
+    promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1', function(error, response){
+      resolve(response)
+    });
+  });
+
+  promise.then(([response]) => {
+    promisePool.query(
       `SELECT
           works.work_id,
           works.title,
@@ -101,38 +115,13 @@ app.get('/api', (req, res) => {
           res.send({
             "statusCode": 200,
             "body": result
-          }
-        );
+          })
+        ;
       }
     );
-  })
-});
-
-app.get('/lalala', async (req, res) => {
-  const promisePool = pool.promise();
-
-  const [response, fileds] = await promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1');
-
-  const [result, filed] = await promisePool.query(
-    `SELECT
-        works.work_id,
-        works.title,
-        works.genru,
-        works.name,
-        works.image,
-        COUNT(*) AS COUNT
-      FROM reviews
-      INNER JOIN works ON reviews.work_id = works.work_id
-      WHERE reviews.created_at BETWEEN '${ response[0].created_at }' - INTERVAL 7 DAY AND '${ response[0].created_at }'
-      GROUP BY reviews.work_id
-      ORDER BY COUNT DESC
-      LIMIT 3`
-  );
-
-  res.send({
-    "statusCode": 200,
-    "body": result
   });
+
+  return promise;
 });
 
 // catch 404 and forward to error handler
