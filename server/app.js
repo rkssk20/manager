@@ -80,25 +80,61 @@ var pool = mysql.createPool({
 global.pool = pool;
 
 app.get('/api', (req, res) => {
-  res.send({
-    "statusCode": 200,
-    "body": 'lalala'
+  const promisePool = pool.promise();
+  
+  promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1', function(error, response){
+    if(!error){
+      promisePool.query(
+        `SELECT
+            works.work_id,
+            works.title,
+            works.genru,
+            works.name,
+            works.image,
+            COUNT(*) AS COUNT
+          FROM reviews
+          INNER JOIN works ON reviews.work_id = works.work_id
+          WHERE reviews.created_at BETWEEN '${ response[0].created_at }' - INTERVAL 7 DAY AND '${ response[0].created_at }'
+          GROUP BY reviews.work_id
+          ORDER BY COUNT DESC
+          LIMIT 3`, function(error, result){
+            res.send({
+              "statusCode": 200,
+              "body": result
+            }
+          );
+        }
+      );
+    }
   });
 });
 
-app.get('/lalala', (req, res) => {
-  // pool.query('SELECT * FROM works', function (error, result){
-  //   pool.query(`SELECT * FROM reviews WHERE review_id=${  }`, function(error, response){
-  //     res.send({
-  //       "statusCode": 200,
-  //       "body": response
-  //     });
-  //   });
-  // })
-  res.send({
-    "statusCode": 200,
-    "body": 'lalala'
-  });
+app.get('/lalala', async (req, res) => {
+  const promisePool = pool.promise();
+
+  const [response, fileds] = await promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1');
+
+  promisePool.query(
+    `SELECT
+        works.work_id,
+        works.title,
+        works.genru,
+        works.name,
+        works.image,
+        COUNT(*) AS COUNT
+      FROM reviews
+      INNER JOIN works ON reviews.work_id = works.work_id
+      WHERE reviews.created_at BETWEEN '${ response[0].created_at }' - INTERVAL 7 DAY AND '${ response[0].created_at }'
+      GROUP BY reviews.work_id
+      ORDER BY COUNT DESC
+      LIMIT 3`, function(error, result){
+        res.send({
+          "statusCode": 200,
+          "body": result
+        }
+      );
+    }
+  );
 });
 
 // catch 404 and forward to error handler
