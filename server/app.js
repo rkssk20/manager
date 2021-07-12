@@ -79,6 +79,8 @@ var pool = mysql.createPool({
 
 global.pool = pool;
 
+
+
 app.get('/api', (req, res) => {
   pool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1', function(error, result){
     res.send({
