@@ -5,50 +5,50 @@ on:
       - main
 
 jobs:
-  front:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@main
+  # front:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@main
 
-      - name: Install Dependencies
-        run: npm install
-        working-directory: ./front
+  #     - name: Install Dependencies
+  #       run: npm install
+  #       working-directory: ./front
 
-      # Reactのbuildに使用する.envの作成
-      - name: Create env
-        run: |
-          touch .env
-          echo "REACT_APP_MOVIE=${{ secrets.REACT_APP_MOVIE }}" >> .env
-          echo "REACT_APP_ANIME=${{ secrets.REACT_APP_ANIME }}" >> .env
-          echo "REACT_APP_AUTH0_DOMAIN=${{ secrets.REACT_APP_AUTH0_DOMAIN }}" >> .env
-          echo "REACT_APP_AUTH0_CLIENT=${{ secrets.REACT_APP_AUTH0_CLIENT }}" >> .env
-          echo "REACT_APP_API=${{ secrets.REACT_APP_API }}" >> .env
-        working-directory: ./front
+  #     # Reactのbuildに使用する.envの作成
+  #     - name: Create env
+  #       run: |
+  #         touch .env
+  #         echo "REACT_APP_MOVIE=${{ secrets.REACT_APP_MOVIE }}" >> .env
+  #         echo "REACT_APP_ANIME=${{ secrets.REACT_APP_ANIME }}" >> .env
+  #         echo "REACT_APP_AUTH0_DOMAIN=${{ secrets.REACT_APP_AUTH0_DOMAIN }}" >> .env
+  #         echo "REACT_APP_AUTH0_CLIENT=${{ secrets.REACT_APP_AUTH0_CLIENT }}" >> .env
+  #         echo "REACT_APP_API=${{ secrets.REACT_APP_API }}" >> .env
+  #       working-directory: ./front
         
-      - name: Build
-        run: npm run build
-        working-directory: ./front
+  #     - name: Build
+  #       run: npm run build
+  #       working-directory: ./front
 
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-northeast-1
+  #     - name: Configure AWS Credentials
+  #       uses: aws-actions/configure-aws-credentials@v1
+  #       with:
+  #         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #         aws-region: ap-northeast-1
           
-      - name: S3 sync
-        run: |
-          aws s3 sync ./front/build s3://app-audience --delete
+  #     - name: S3 sync
+  #       run: |
+  #         aws s3 sync ./front/build s3://app-audience --delete
 
-      - name: Clear cache in CloudFront
-        uses: chetan/invalidate-cloudfront-action@v1.2
-        env:
-          DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
-          PATHS: "/*"
-          AWS_REGION: ap-northeast-1
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  #     - name: Clear cache in CloudFront
+  #       uses: chetan/invalidate-cloudfront-action@v1.2
+  #       env:
+  #         DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
+  #         PATHS: "/*"
+  #         AWS_REGION: ap-northeast-1
+  #         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  #         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
   server:
     runs-on: ubuntu-latest
