@@ -19,7 +19,7 @@ provider:
     CLIENT_SECRET: ${env::CLIENT_SECRET}
   vpc:
     securityGroupIds:
-      - sg-0eed6f894355bf181
+      - sg-07bc1a008e226fc70
     subnetIds:
       - subnet-0b9f35c5a84059a6e
       - subnet-08e227b20924b701f
