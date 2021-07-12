@@ -83,7 +83,7 @@ global.pool = pool;
 
 app.get('/api', (req, res) => {
   pool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1', function(error, result){
-    context(null, {
+    res.send({
       "statusCode": 202,
       "body": result[0].created_at
     });
