@@ -8,22 +8,17 @@ const lambda = new AWS.Lambda();
 router.get('/', async function(req, res){
 
   const params = {
-    FunctionName: 'audience-spotify',
-    InvocationType: 'RequestResponse'
+    FunctionName: 'audience-promise',
+    InvocationType: 'RequestResponse',
   };
 
-  lambda.invoke(params, function(err, data){
-    if(err){
-      res.send({
-        "statusCode": 200,
-        "body": err
-      });
-    }else{
-      res.send({
-        "statusCode": 200,
-        "body": data
-      });
-    }
+  const result = await lambda.invoke(params).promise();
+
+  const body = JSON.parse(result.Payload);
+
+  res.send({
+    "statusCode": 202,
+    "body": body
   });
   // pool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1', function(error, response){
   //   pool.query(
