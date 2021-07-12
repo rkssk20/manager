@@ -79,6 +79,7 @@ var pool = mysql.createPool({
 
 global.pool = pool;
 
+
 app.get('/api', (req, res) => {
   pool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1', function(error, result){
     res.send({
@@ -88,28 +89,30 @@ app.get('/api', (req, res) => {
   });
 });
 
-app.get('/lalala', (req, res) => {
-  // const promisePool = pool.promise();
+app.get('/lalala', async (req, res) => {
+  const promisePool = pool.promise();
 
-  pool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1', function(error, response){
+  const [response] = await promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1');
 
-    pool.query(
-      `SELECT
-          work_id,
-          title,
-          genru,
-          name,
-          image,
-        FROM works
-        `, function(error, result){
+  const [result] = await promisePool.query(
+    `SELECT
+      works.work_id,
+      works.title,
+      works.genru,
+      works.name,
+      works.image,
+      COUNT(*) AS COUNT
+    FROM reviews
+    INNER JOIN works ON reviews.work_id = works.work_id
+    WHERE reviews.created_at BETWEEN '${ response[0].created_at }' - INTERVAL 7 DAY AND '${ response[0].created_at }'
+    GROUP BY reviews.work_id
+    ORDER BY COUNT DESC
+    LIMIT 3`
+  );
 
-          res.send({
-            "statusCode": 202,
-            "body": result
-          }
-        );
-      }
-    );
+  res.send({
+    "statusCode": 202,
+    "body": result
   });
 });
 
