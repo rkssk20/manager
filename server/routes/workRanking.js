@@ -13,7 +13,7 @@ router.get('/', async function(req, res){
   };
 
   const result = await lambda.invoke(params).promise();
-
+  
   const body = JSON.parse(result.Payload);
 
   res.send({
