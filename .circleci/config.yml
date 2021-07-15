@@ -29,7 +29,7 @@ workflows:
           region: AWS_REGION
           account-url: AWS_ECR_ACCOUNT_URL
           repo: 'audience'
-          dockerfile: audience/server/Dockerfile
+          dockerfile: server/Dockerfile
           tag: "${CIRCLE_SHA1}"
       - aws-ecs/deploy-service-update:
           requires:
