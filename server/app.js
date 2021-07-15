@@ -81,7 +81,7 @@ app.get('/', (req, res) => {
   res.send('test3');
 });
 
-app.get('/api', (req, res) => {
+app.get('/test', (req, res) => {
   pool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1', function(error, result){
     res.send(result[0].created_at);
   });
