@@ -60,6 +60,8 @@ function App(){
     .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log(error));
+
+    console.log('ver.2')
   }, []);
 
   // ログインしていなければ案内するページ
