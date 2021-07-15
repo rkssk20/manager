@@ -30,7 +30,7 @@ workflows:
           tag: "${CIRCLE_SHA1}"
       - aws-ecs/deploy-service-update:
           requires:
-      - aws-ecr/build-and-push-image
+            - aws-ecr/build-and-push-image
           family: 'audience-task'
           cluster-name: 'audience-cluster'
           service-name: 'audiencee'
