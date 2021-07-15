@@ -78,14 +78,14 @@ jobs:
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         working-directory: ./server
-
+          
       - name: ECS task
         id: render-container
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: audience/task-definition.json
           container-name: audience_server
-          image: ${{ secrets.AWS_ECR_URI }}
+          image: 453942002859.dkr.ecr.ap-northeast-1.amazonaws.com/audience_server/app:latest
 
       - name: Deploy to Amazon ECS service
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
