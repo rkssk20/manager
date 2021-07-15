@@ -21,7 +21,7 @@ orbs:
 
 workflows:
   front:
-    build:
+    jobs:
       docker:
         - image: circleci/node:14.17.0
       steps:
