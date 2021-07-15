@@ -17,12 +17,10 @@
       "command": null,
       "linuxParameters": null,
       "cpu": 0,
-      "secrets": [
-        {
-          "name": "ecs-task-key",
-          "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:453942002859:secret:ecs-task-key-lFs6al"
-        }
-      ],
+      "secrets": [{
+        "name": "evelopment/audience",
+        "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:453942002859:secret:evelopment/audience-jLVI4i"
+      }],
       "resourceRequirements": null,
       "ulimits": null,
       "dnsServers": null,
