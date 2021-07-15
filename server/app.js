@@ -78,7 +78,7 @@ var pool = mysql.createPool({
 global.pool = pool;
 
 app.get('/', (req, res) => {
-  res.send('test2')
+  res.send('test2');
 });
 
 app.get('/api', (req, res) => {
