@@ -7,14 +7,19 @@ workflows:
   server:
     jobs:
       - aws-ecr/build-and-push-image:
-          region: AWS_REGION
           account-url: AWS_ECR_ACCOUNT_URL
-          repo: server
+          region: AWS_REGION
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          create-repo: true
+          dockerfile: ./server/Dockerfile
+          repo: audience_server
           tag: "${CIRCLE_SHA1}"
+
       - aws-ecs/deploy-service-update:
           requires:
             - aws-ecr/build-and-push-image
           family: 'audience-task'
-          cluster-name: 'audience-cluster'
-          service-name: 'audience'
-          container-image-name-updates: 'container=audience_server,tag=${CIRCLE_SHA1}'
+          cluster-name: 'audience-cluster' #ECSのクラスターのARN
+          service-name: 'audience' #サービス名
+          container-image-name-updates: "container=audience_server,tag=${CIRCLE_SHA1}"
