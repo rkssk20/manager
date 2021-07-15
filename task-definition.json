@@ -17,10 +17,10 @@
       "command": null,
       "linuxParameters": null,
       "cpu": 0,
-      "environment": [
+      "secrets": [
         {
           "name": "ecs-task-key",
-          "value": "arn:aws:secretsmanager:ap-northeast-1:453942002859:secret:ecs-task-key-lFs6al"
+          "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:453942002859:secret:ecs-task-key-lFs6al"
         }
       ],
       "resourceRequirements": null,
@@ -28,7 +28,6 @@
       "dnsServers": null,
       "mountPoints": [],
       "workingDirectory": null,
-      "secrets": null,
       "dockerSecurityOptions": null,
       "memory": 128,
       "memoryReservation": null,
