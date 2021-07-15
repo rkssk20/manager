@@ -5,17 +5,16 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 var mysql = require('mysql2');
-const serverlessExpress = require('@vendia/serverless-express/src/middleware');
 
 // var accountRouter = require('./routes/account');
-var profileRouter = require('./routes/profile');
+// var profileRouter = require('./routes/profile');
 // var followRouter = require('./routes/follow');
 // var unFollowRouter = require('./routes/unFollow');
 // var reviewRouter = require('./routes/review');
 // var deletePostRouter = require('./routes/deletePost');
-var musicRouter = require('./routes/music');
+// var musicRouter = require('./routes/music');
 // var postsRouter = require('./routes/posts');
-var myPostsRouter = require('./routes/myPosts');
+// var myPostsRouter = require('./routes/myPosts');
 // var workPostsRouter = require('./routes/workPosts');
 // var averageRouter = require('./routes/average');
 // var likeRouter = require('./routes/like');
@@ -25,7 +24,7 @@ var myPostsRouter = require('./routes/myPosts');
 // var iconRouter = require('./routes/icon');
 // var favoritesRouter = require('./routes/favorites');
 // var workRouter = require('./routes/work');
-var workRankingRouter = require('./routes/workRanking');
+// var workRankingRouter = require('./routes/workRanking');
 // var likeRankingRouter = require('./routes/likeRanking');
 // var userRankingRouter = require('./routes/userRanking');
 
@@ -36,7 +35,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(express.json())
-app.use(serverlessExpress.eventContext());
 app.use(logger('dev'));
 app.use(cors({ credentials: true }));
 app.use(express.json());
@@ -44,17 +42,17 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/profile', profileRouter);
+// app.use('/profile', profileRouter);
 // app.use('/account', accountRouter);
 // app.use('/follow', followRouter);
 // app.use('/unFollow', unFollowRouter);
 // app.use('/review', reviewRouter);
 // app.use('/deletePost', deletePostRouter);
-app.use('/music', musicRouter);
+// app.use('/music', musicRouter);
 // app.use('/like', likeRouter);
 // app.use('/unLike', unLikeRouter);
 // app.use('/posts', postsRouter);
-app.use('/myPosts', myPostsRouter);
+// app.use('/myPosts', myPostsRouter);
 // app.use('/average', averageRouter);
 // app.use('/workPosts', workPostsRouter);
 // app.use('/favorites', favoritesRouter);
@@ -62,7 +60,7 @@ app.use('/myPosts', myPostsRouter);
 // app.use('/delete', deleteRouter);
 // app.use('/icon', iconRouter);
 // app.use('/work', workRouter);
-app.use('/workRanking', workRankingRouter);
+// app.use('/workRanking', workRankingRouter);
 // app.use('/likeRanking', likeRankingRouter);
 // app.use('/userRanking', userRankingRouter);
 
@@ -79,43 +77,42 @@ var pool = mysql.createPool({
 
 global.pool = pool;
 
-
+app.get('/', (req, res) => {
+  res.send('test2')
+});
 
 app.get('/api', (req, res) => {
   pool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1', function(error, result){
-    res.send({
-      "statusCode": 202,
-      "body": result[0].created_at
-    });
+    res.send(result[0].created_at);
   });
 });
 
-app.get('/lalala', async (req, res) => {
-  const promisePool = pool.promise();
+// app.get('/lalala', async (req, res) => {
+//   const promisePool = pool.promise();
 
-  const [response] = await promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1');
+//   const [response] = await promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1');
 
-  const [result] = await promisePool.query(
-    `SELECT
-      works.work_id,
-      works.title,
-      works.genru,
-      works.name,
-      works.image,
-      COUNT(*) AS COUNT
-    FROM reviews
-    INNER JOIN works ON reviews.work_id = works.work_id
-    WHERE reviews.created_at BETWEEN '${ response[0].created_at }' - INTERVAL 7 DAY AND '${ response[0].created_at }'
-    GROUP BY reviews.work_id
-    ORDER BY COUNT DESC
-    LIMIT 3`
-  );
+//   const [result] = await promisePool.query(
+//     `SELECT
+//       works.work_id,
+//       works.title,
+//       works.genru,
+//       works.name,
+//       works.image,
+//       COUNT(*) AS COUNT
+//     FROM reviews
+//     INNER JOIN works ON reviews.work_id = works.work_id
+//     WHERE reviews.created_at BETWEEN '${ response[0].created_at }' - INTERVAL 7 DAY AND '${ response[0].created_at }'
+//     GROUP BY reviews.work_id
+//     ORDER BY COUNT DESC
+//     LIMIT 3`
+//   );
 
-  res.send({
-    "statusCode": 202,
-    "body": result
-  });
-});
+//   res.send({
+//     "statusCode": 202,
+//     "body": result
+//   });
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

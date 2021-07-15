@@ -5,10 +5,9 @@
   "scripts": {
     "start": "node ./bin/www",
     "start-watch": "nodemon ./bin/www",
-    "deploy": "serverless deploy"
+    "deploy": "pm2-runtime start ./bin/www"
   },
   "dependencies": {
-    "@vendia/serverless-express": "^4.3.9",
     "aws-sdk": "^2.943.0",
     "bcrypt": "^5.0.1",
     "cookie-parser": "~1.4.4",
@@ -23,6 +22,7 @@
     "multer-s3": "^2.9.0",
     "mysql2": "^2.2.5",
     "nodemon": "^2.0.7",
+    "pm2": "^5.1.0",
     "spotify-web-api-node": "^5.0.2"
   },
   "devDependencies": {

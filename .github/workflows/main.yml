@@ -1,4 +1,4 @@
-name: React on S3 & Express on Lambda
+name: React on S3 & Express on ECS
 on:
   push:
     branches:
@@ -30,6 +30,7 @@ jobs:
   #       run: npm run build
   #       working-directory: ./front
 
+        # AWSアクセス権限
   #     - name: Configure AWS Credentials
   #       uses: aws-actions/configure-aws-credentials@v1
   #       with:
@@ -56,27 +57,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@main
 
-      - name: Install Dependencies
-        run: npm install
-        working-directory: ./server
-    
-      # serverless-dotenvに使用する.envの作成
-      - name: Create env
-        run: |
-          touch .env
-          echo "MYSQL_HOST=${{ secrets.MYSQL_HOST }}" >> .env
-          echo "MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" >> .env
-          echo "MYSQL_USER=${{ secrets.MYSQL_USER }}" >> .env
-          echo "MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}" >> .env
-          echo "ACCESS_KEY_ID=${{ secrets.ACCESS_KEY_ID }}" >> .env
-          echo "SECRET_ACCESS_KEY=${{ secrets.SECRET_ACCESS_KEY }}" >> .env
-          echo "BUCKET=${{ secrets.BUCKET }}" >> .env
-          echo "SECRET_ACCESS_KEY=${{ secrets.SECRET_ACCESS_KEY }}" >> .env
-          echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" >> .env
-          echo "CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}" >> .env
-          echo "SECRET_ACCESS_KEY=${{ secrets.SECRET_ACCESS_KEY }}" >> .env
-        working-directory: ./server
-
+      # AWSアクセス権限
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -84,15 +65,31 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-northeast-1
 
-      - name: Build
-        run: npx serverless deploy
-        working-directory: ./server
+      - name: Login to ECR
+        id: login-ecr
+        users: aws-actions/amazon-ecr-login@v1
 
-      - name: Clear cache in CloudFront
-        uses: chetan/invalidate-cloudfront-action@v1.2
+      - name: push image to ECR
         env:
-          DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
-          PATHS: "/*"
-          AWS_REGION: ap-northeast-1
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPO_NAME }}
+        run: |
+          IMAGE_TAG=latest
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+
+      - name: ECS task
+        id: render-container
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: aws/task-definition.json
+          container-name: audience_server
+          image: 453942002859.dkr.ecr.ap-northeast-1.amazonaws.com/audience_server/app:latest
+
+      - name: Deploy to Amazon ECS service
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.render-container.outputs.task-definition }}
+          service: audience
+          cluster: audience-cluster

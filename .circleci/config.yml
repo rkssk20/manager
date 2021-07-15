@@ -1,0 +1,20 @@
+version: 2.1
+orbs:
+  aws-ecr: circleci/aws-ecr@6.7.0
+  aws-ecs: circleci/aws-ecs@1.1.0
+
+workflows:
+  server:
+    jobs:
+      - aws-ecr/build-and-push-image:
+          region: AWS_REGION
+          account-url: AWS_ECR_ACCOUNT_URL
+          repo: server
+          tag: "${CIRCLE_SHA1}"
+      - aws-ecs/deploy-service-update:
+          requires:
+            - aws-ecr/build-and-push-image
+          family: 'audience-task'
+          cluster-name: 'audience-cluster'
+          service-name: 'audience'
+          container-image-name-updates: 'container=audience_server,tag=${CIRCLE_SHA1}'
