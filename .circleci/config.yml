@@ -4,37 +4,25 @@ orbs:
   aws-ecr: circleci/aws-ecr@6.7.0
   aws-ecs: circleci/aws-ecs@1.1.0
 
-# jobs:
-#   build:
-#     docker:
-#       - image: circleci/node:14.17.0
-#     steps:
-#       - checkout
-#       - run: git clone https://github.com/rkssk20/audience.git && cd audience/front && npm install && npm run build .
+jobs:
+  build:
+    docker:
+      - image: circleci/node:14.17.0
+    steps:
+      - checkout
+      - run: git clone https://github.com/rkssk20/audience.git && cd audience/front && npm install && npm run build .
 
-#       - aws-s3/sync:
-#           aws-access-key-id: AWS_ACCESS_KEY_ID
-#           aws-region: AWS_REGION
-#           aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-#           from: audience/front/build
-#           to: s3://app-audience/
+      - aws-s3/sync:
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-region: AWS_REGION
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          from: audience/front/build
+          to: s3://app-audience/
 
 workflows:
   front:
     jobs:
-      docker:
-        - image: circleci/node:14.17.0
-      steps:
-        - checkout
-        - run: git clone https://github.com/rkssk20/audience.git && cd audience/front && npm install && npm run build .
-
-        - aws-s3/sync:
-            aws-access-key-id: AWS_ACCESS_KEY_ID
-            aws-region: AWS_REGION
-            aws-secret-access-key: AWS_SECRET_ACCESS_KEY
-            from: audience/front/build
-            to: s3://app-audience/
-
+      - build
   server:
     jobs:
       - aws-ecr/build-and-push-image:
