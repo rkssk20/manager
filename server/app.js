@@ -78,7 +78,7 @@ var pool = mysql.createPool({
 global.pool = pool;
 
 app.get('/', (req, res) => {
-  res.send('test4');
+  res.send('env:' + process.env['MYSQL_DATABASE']);
 });
 
 app.get('/test', (req, res) => {
