@@ -20,6 +20,9 @@ jobs:
           to: s3://app-audience/
 
 workflows:
+  front:
+    jobs:
+      - build
   server:
     jobs:
       - aws-ecr/build-and-push-image:
