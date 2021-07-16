@@ -20,12 +20,13 @@ Express.js
 MySQL
 ### インフラ
 - Docker
-- CircleCI(テストなし。GithubからAWSへの自動デプロイのみ)
-- AWS
-  - RDS
-  - EC2
-  - ECS
-  - ECR
+#### フロント
+Cloud Front + S3
+#### サーバー
+ALB + ECS (+ ECR)
+#### その他
+Route53 + ACM でSSL化
+Git Hub Actionsで自動デプロイ
 ### 認証
 Auth0
 ### 外部API
