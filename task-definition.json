@@ -5,7 +5,7 @@
     {
       "dnsSearchDomains": null,
       "environmentFiles": [{
-        "value": "arn:aws:s3:::audience-env/.env",
+        "value": "arn:aws:s3:::audience-env/audience.env",
         "type": "s3"
       }],
       "logConfiguration": null,
