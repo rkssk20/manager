@@ -30,7 +30,7 @@ jobs:
         run: npm run build
         working-directory: ./front
 
-        AWSアクセス権限
+        # AWSアクセス権限
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
