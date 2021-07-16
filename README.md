@@ -5,8 +5,7 @@
 ## 機能一覧
 ### CRUD
 - レビューの投稿、削除
-- プロフィール画像のアップロード
-- ユーザー名、ID、プロフィールの変更
+- プロフィールの変更、プロフィール画像のアップロード
 ### ログイン機能
 - Auth0を利用したアカウント作成とログイン
 
@@ -20,13 +19,13 @@ Express.js
 MySQL
 ### インフラ
 - Docker
-#### フロント
-Cloud Front + S3
-#### サーバー
-ALB + ECS (+ ECR)
-#### その他
-Route53 + ACM でSSL化
-Git Hub Actionsで自動デプロイ
+- フロント
+  Cloud Front + S3
+- サーバー
+  ALB + ECS (+ ECR)
+- その他
+  Route53 + ACMでHTTPS接続
+  GitHub Actionsで自動デプロイ
 ### 認証
 Auth0
 ### 外部API
