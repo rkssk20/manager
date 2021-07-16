@@ -23,7 +23,6 @@ router.post('/', function(req, res){
     connection.query(`DELETE from reviews WHERE review_id='${ req.body.review_id }'`, function(err, results, fields){
       if(err){
         return connection.rollback(() => {
-          console.log(err)
           throw err;
         });
       }
@@ -32,7 +31,6 @@ router.post('/', function(req, res){
       connection.query(`DELETE from likes WHERE review_id='${ req.body.review_id }'`, function(err, results, fields){
         if(err){
           return connection.rollback(() => {
-            console.log(err)
             throw err;
           });
         }
