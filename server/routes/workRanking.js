@@ -32,6 +32,8 @@ router.get('/', function(req, res){
 
   res.send(response, result);
 
+  return promise;
+
 });
 
 module.exports = router;
