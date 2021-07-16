@@ -35,15 +35,9 @@ router.post('/', function(req, res){
     if(err) throw err;
 
     if(result.length !== 0){
-      res.send({
-        "statusCode": 200,
-        "body": result
-      });
+      res.send(result);
     }else{
-      res.send({
-        "statusCode": 200,
-        "body": ['empty']
-      });
+      res.send(['empty']);
     }
   });
 });

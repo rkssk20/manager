@@ -47,10 +47,7 @@ router.post('/', async function(req, res) {
         });
       };
 
-      res.send({
-        "statusCode": 202,
-        "body": resultList
-      });
+      res.send(resultList);
     });
   }
   
@@ -65,8 +62,6 @@ router.post('/', async function(req, res) {
       });
 
       res.send({
-        "statusCode": 202,
-        "body": {
           id: data.body.id,
           url: data.body.external_urls.spotify,
           image: data.body.album.images[0].url,
@@ -74,8 +69,7 @@ router.post('/', async function(req, res) {
           title: data.body.name,
           name:  nameList.join(','),
           date: data.body.album.release_date
-        }
-      });
+        });
     }); 
   }
 });
