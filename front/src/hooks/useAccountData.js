@@ -20,6 +20,7 @@ function useAccountData(userData, paramsId){
       })
       .then(response => response.json())
       .then(result => {
+        console.log(result)
         setAccountData(result[0]);
       });
     }

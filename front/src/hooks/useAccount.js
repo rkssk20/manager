@@ -22,7 +22,8 @@ function useAccount(searchSubmit, searchGenru){
       if(result.length === 0){
         setAccountData(['empty']);
       }else{
-        setAccountData(result);
+        console.log(result)
+        setAccountData(result[0]);
       }
     });
   }, [searchSubmit, searchGenru, userData.user_id]);

@@ -28,8 +28,8 @@ router.get('/', function(req, res){
       WHERE reviews.created_at BETWEEN '${ response[0].created_at }' - INTERVAL 7 DAY AND '${ response[0].created_at }'
       GROUP BY reviews.work_id
       ORDER BY COUNT DESC
-      LIMIT 3`, function(err, res){
-        res.send(res);
+      LIMIT 3`, function(error, result){
+        res.send(result);
     });
   });
 });
