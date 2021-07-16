@@ -77,6 +77,30 @@ var pool = mysql.createPool({
 
 global.pool = pool;
 
+app.get('/', async function(req, res){
+  const promisePool = pool.promise();
+
+  const [response, field] = await promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1');
+
+  const [result, fields] = await promisePool.query(
+    `SELECT
+      works.work_id,
+      works.title,
+      works.genru,
+      works.name,
+      works.image,
+      COUNT(*) AS COUNT
+    FROM reviews
+    INNER JOIN works ON reviews.work_id = works.work_id
+    WHERE reviews.created_at BETWEEN '${ response[0].created_at }' - INTERVAL 7 DAY AND '${ response[0].created_at }'
+    GROUP BY reviews.work_id
+    ORDER BY COUNT DESC
+    LIMIT 3`
+  );
+
+  res.send(result);
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
