@@ -80,9 +80,9 @@ global.pool = pool;
 app.get('/', async function(req, res){
   const promisePool = pool.promise();
 
-  const [response, field] = await promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1');
+  const response = await promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1');
 
-  const [result, fields] = await promisePool.query(
+  const result = await promisePool.query(
     `SELECT
       works.work_id,
       works.title,

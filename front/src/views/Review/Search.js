@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 // import useWorkRanking from '../../hooks/useWorkRanking';
 import Form from '../../Atoms/Form';
 // import WorkRanking from '../Ranking/WorkRanking';
@@ -89,18 +89,6 @@ function Search(){
   // const resultList = useWorkRanking();
   const [searchSubmit, setSearchSubmit] = useState('');
   const placeholder = 'レビューしたい作品を検索！';
-
-  useEffect(() => {
-    fetch(`${ process.env.REACT_APP_API }/api`)
-    .then(response => response.json())
-    .then(res => console.log(res.body))
-    .catch(err => console.log(err));
-
-    fetch(`${ process.env.REACT_APP_API }/lalala`)
-    .then(response => response.json())
-    .then(res => console.log(res.body))
-    .catch(err => console.log(err));
-  }, []);
 
   return(
     <>
