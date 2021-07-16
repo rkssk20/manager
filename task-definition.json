@@ -4,7 +4,10 @@
   "containerDefinitions": [
     {
       "dnsSearchDomains": null,
-      "environmentFiles": null,
+      "environmentFiles": [{
+        "value": "arn:aws:s3:::audience-env/.env",
+        "type": "s3"
+      }],
       "logConfiguration": null,
       "entryPoint": null,
       "portMappings": [
@@ -17,10 +20,7 @@
       "command": null,
       "linuxParameters": null,
       "cpu": 0,
-      "secrets": [{
-        "name": "environment_variable_name",
-        "valueFrom": "arn:aws:secretsmanager:ap-northeast-1:453942002859:secret:evelopment/audience-jLVI4i"
-      }],
+      "secrets": null,
       "resourceRequirements": null,
       "ulimits": null,
       "dnsServers": null,
