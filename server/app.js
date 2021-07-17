@@ -24,9 +24,9 @@ var deleteRouter = require('./routes/delete');
 var iconRouter = require('./routes/icon');
 var favoritesRouter = require('./routes/favorites');
 var workRouter = require('./routes/work');
-var workRankingRouter = require('./routes/workRanking');
-var likeRankingRouter = require('./routes/likeRanking');
-var userRankingRouter = require('./routes/userRanking');
+// var workRankingRouter = require('./routes/workRanking');
+// var likeRankingRouter = require('./routes/likeRanking');
+// var userRankingRouter = require('./routes/userRanking');
 
 var app = express();
 
@@ -60,9 +60,9 @@ app.use('/setting', settingRouter);
 app.use('/delete', deleteRouter);
 app.use('/icon', iconRouter);
 app.use('/work', workRouter);
-app.use('/workRanking', workRankingRouter);
-app.use('/likeRanking', likeRankingRouter);
-app.use('/userRanking', userRankingRouter);
+// app.use('/workRanking', workRankingRouter);
+// app.use('/likeRanking', likeRankingRouter);
+// app.use('/userRanking', userRankingRouter);
 
 // mysql pool
 var pool = mysql.createPool({

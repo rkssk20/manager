@@ -22,8 +22,8 @@ router.get('/', function(req, res){
     INNER JOIN works ON reviews.work_id = works.work_id
     INNER JOIN users ON reviews.user_id = users.user_id
     ORDER BY reviews.likes DESC
-    LIMIT 3`, function (error, result) {
-      res.snd(result);
+    LIMIT 3`, function(error, result){
+      res.send(result);
     }
   );
 });
