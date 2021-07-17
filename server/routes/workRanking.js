@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 // 最新の投稿から一週間以内で、多くレビューされた作品TOP3を取得
-router.get('/', async function(req, res){
+router.get('/', function(req, res){
   const promisePool = pool.promise();
 
   try{
@@ -10,9 +10,9 @@ router.get('/', async function(req, res){
       async function Loop(){      
         const [rows, fields] = await promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1');
 
-        if(fields) console.log(fields)
+        if(fields) console.log('error:' + fields)
 
-        console.log(rows)
+        console.log('途中経過:' + rows);
         return rows[0].created_at;
       };
 
@@ -31,9 +31,9 @@ router.get('/', async function(req, res){
           GROUP BY reviews.work_id
           ORDER BY COUNT DESC
           LIMIT 3`, function(error, result){
-            if(error) console.log(result)
+            if(error) console.log('error:' + error)
 
-            console.log(result)
+            console.log('結果:' + result);
             res.send(result);
           }
         );
@@ -42,7 +42,7 @@ router.get('/', async function(req, res){
 
     Query();
   }catch(error){
-    console.log(error);
+    console.log('error:' + error);
   }
 });
 
