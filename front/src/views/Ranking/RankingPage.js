@@ -22,6 +22,8 @@ const intro ={
 function RankingPage(){
   const resultList = useRanking();
 
+  console.log(resultList);
+
   return(
     resultList ?
     <>
