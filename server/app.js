@@ -77,6 +77,8 @@ var pool = mysql.createPool({
 
 global.pool = pool;
 
+
+
 app.get('/', (req, res) => {
   res.send('ver1');
 });
