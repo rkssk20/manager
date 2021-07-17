@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React, { createContext, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import useLogin from './hooks/useLogin';
 import Navbar from './views/Navbar';
@@ -54,6 +54,13 @@ const theme = createMuiTheme({
 
 function App(){
   const userData = useLogin();
+
+  useEffect(() => {
+    fetch(`${ process.env.REACT_APP_API }`)
+    .then(res => res.text())
+    .then(result => console.log(result))
+    .catch(error => console.log(error));
+  }, []);
 
   function PrivateRoute(props){
     return(

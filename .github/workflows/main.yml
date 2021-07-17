@@ -91,4 +91,4 @@ jobs:
         with:
           task-definition: ${{ steps.render-container.outputs.task-definition }}
           service: audience
-          cluster: audience-clu
+          cluster: audience-cluster

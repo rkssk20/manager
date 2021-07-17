@@ -24,7 +24,7 @@ var mysql = require('mysql2');
 // var iconRouter = require('./routes/icon');
 // var favoritesRouter = require('./routes/favorites');
 // var workRouter = require('./routes/work');
-var workRankingRouter = require('./routes/workRanking');
+// var workRankingRouter = require('./routes/workRanking');
 // var likeRankingRouter = require('./routes/likeRanking');
 // var userRankingRouter = require('./routes/userRanking');
 
@@ -60,7 +60,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/delete', deleteRouter);
 // app.use('/icon', iconRouter);
 // app.use('/work', workRouter);
-app.use('/workRanking', workRankingRouter);
+// app.use('/workRanking', workRankingRouter);
 // app.use('/likeRanking', likeRankingRouter);
 // app.use('/userRanking', userRankingRouter);
 
@@ -77,38 +77,36 @@ var pool = mysql.createPool({
 
 global.pool = pool;
 
-
-
-app.get('/', (req, res) => {
+app.get('/', function(req, res){
   res.send('ver1');
 });
 
-app.get('/test', function(req, res){
+// app.get('/test', function(req, res){
 
-  const response = [];
+//   const response = [];
 
-  pool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1', function(error, result){
-    response.push(result[0].created_at);
-  });
+//   pool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1', function(error, result){
+//     response.push(result[0].created_at);
+//   });
 
-  pool.query(
-    `SELECT
-      works.work_id,
-      works.title,
-      works.genru,
-      works.name,
-      works.image,
-      COUNT(*) AS COUNT
-    FROM reviews
-    INNER JOIN works ON reviews.work_id = works.work_id
-    WHERE reviews.created_at BETWEEN '${ data[0] }' - INTERVAL 7 DAY AND '${ data[0] }'
-    GROUP BY reviews.work_id
-    ORDER BY COUNT DESC
-    LIMIT 3`, function(error, result){
-      res.send(result);
-    }
-  );
-});
+//   pool.query(
+//     `SELECT
+//       works.work_id,
+//       works.title,
+//       works.genru,
+//       works.name,
+//       works.image,
+//       COUNT(*) AS COUNT
+//     FROM reviews
+//     INNER JOIN works ON reviews.work_id = works.work_id
+//     WHERE reviews.created_at BETWEEN '${ data[0] }' - INTERVAL 7 DAY AND '${ data[0] }'
+//     GROUP BY reviews.work_id
+//     ORDER BY COUNT DESC
+//     LIMIT 3`, function(error, result){
+//       res.send(result);
+//     }
+//   );
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

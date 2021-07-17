@@ -14,6 +14,8 @@
       "entryPoint": null,
       "portMappings": [
         {
+          "hostPort": 0,
+          "protocol": "tcp",
           "containerPort": 3100
         }
       ],
@@ -59,7 +61,7 @@
     "EXTERNAL",
     "EC2"
   ],
-  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:453942002859:task-definition/audience-task:49",
+  "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:453942002859:task-definition/audience-task:53",
   "family": "audience-task",
   "requiresAttributes": [
     {
@@ -93,7 +95,7 @@
   ],
   "networkMode": "bridge",
   "cpu": null,
-  "revision": 49,
+  "revision": 53,
   "status": "ACTIVE",
   "inferenceAccelerators": null,
   "proxyConfiguration": null,
