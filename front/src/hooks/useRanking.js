@@ -6,18 +6,14 @@ function useRanking(){
   useEffect(() => {
     const REACT_APP_API = process.env.REACT_APP_API;
 
-    fetch(`${ REACT_APP_API }/workRanking`)
-    .then(response => response.json())
-    .then(result => setResultList(result));
+    const work = fetch(`${ REACT_APP_API }/workRanking`).then(response => response.json()).then(result => result);
+    const like = fetch(`${ REACT_APP_API }/likeRanking`).then(response => response.json()).then(result => result);
+    const user = fetch(`${ REACT_APP_API }/userRanking`).then(response => response.json()).then(result => result);
 
-    // const work = fetch(`${ REACT_APP_API }/workRanking`).then(response => response.json()).then(result => result);
-    // const like = fetch(`${ REACT_APP_API }/likeRanking`).then(response => response.json()).then(result => result);
-    // const user = fetch(`${ REACT_APP_API }/userRanking`).then(response => response.json()).then(result => result);
-
-    // Promise.all([work, like, user])
-    // .then(value => {
-    //   setResultList({work: value[0], like: value[1], user: value[2]});
-    // });
+    Promise.all([work, like, user])
+    .then(value => {
+      setResultList({work: value[0], like: value[1], user: value[2]});
+    });
   }, []);
 
   return resultList;
