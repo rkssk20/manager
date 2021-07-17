@@ -3,8 +3,6 @@ var router = express.Router();
 
 // 最新の投稿から一週間以内で、多くレビューされた作品TOP3を取得
 router.get('/', async function(req, res){
-
-  const resultList = [];
   const promisePool = pool.promise();
 
   try{
@@ -12,10 +10,13 @@ router.get('/', async function(req, res){
       async function Loop(){      
         const [rows, fields] = await promisePool.query('SELECT created_at FROM reviews ORDER BY created_at DESC LIMIT 1');
 
-        resultList.push(rows);
+        if(fields) console.log(fields)
+
+        console.log(rows)
+        return rows[0].created_at;
       };
 
-      Loop().then(() => {
+      Loop().then((response) => {
         pool.query(
           `SELECT
             works.work_id,
@@ -26,10 +27,13 @@ router.get('/', async function(req, res){
             COUNT(*) AS COUNT
           FROM reviews
           INNER JOIN works ON reviews.work_id = works.work_id
-          WHERE reviews.created_at BETWEEN '${ resultList[0] }' - INTERVAL 7 DAY AND '${ resultList[0] }'
+          WHERE reviews.created_at BETWEEN '${ response }' - INTERVAL 7 DAY AND '${ response }'
           GROUP BY reviews.work_id
           ORDER BY COUNT DESC
           LIMIT 3`, function(error, result){
+            if(error) console.log(result)
+
+            console.log(result)
             res.send(result);
           }
         );

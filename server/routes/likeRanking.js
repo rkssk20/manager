@@ -6,6 +6,7 @@ var router = express.Router();
 router.get('/', async function(req, res){
 
   const resultList = [];
+  let day = 0;
   const promisePool = pool.promise();
 
   try{
