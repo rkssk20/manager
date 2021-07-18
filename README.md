@@ -1,5 +1,5 @@
 # Audience
-[link](https://www.audience.cf){:target="_blank"}
+<a href='https://www.audience.cf'>https://www.audience.cf</a>
 
 映画、音楽、本、アニメの中から好きな作品と紐づけてレビューを投稿する、SNS風のWEBアプリです。CRUD機能の実装と4つの外部APIの利用, Docker, AWS, Auth0, GitHub Actionsの自動デプロイなどを試しました。
 現在投稿されているレビューは開発時に用意したものです。
