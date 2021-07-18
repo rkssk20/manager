@@ -13,26 +13,22 @@
   - AWS S3へプロフィール画像のアップロード
   - フォロー、いいね、検索、無限スクロールなど
 ## 使用技術
-- 言語
-  - フロントエンド  
-    React.js  
-    (Material-UI)
-  - バックエンド  
-    Express.js
-  - DB  
-    MySQL
+- 開発環境
+  - フロントエンド React.js (Material-UI)
+  - バックエンド Express.js
+  - DB MySQL
+  - Dockerで開発
+  - GitHub Actionsで自動デプロイ
 
 - インフラ
   - フロントエンド  
     Cloud Front + S3 (+ Lambda@Edge)
   - サーバー  
     ALB + ECS (+ ECR)
-  - Dockerで開発
   - Route53 + ACMでHTTPS接続  
-  - GitHub Actionsで自動デプロイ
 
 - 認証  
-  Auth0
+  - Auth0
 - 外部API
   - TMDb(映画情報の取得)
   - Spotify(音楽)
