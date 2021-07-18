@@ -14,17 +14,17 @@
   - フォロー、いいね、検索、無限スクロールなど
 ## 使用技術
 - 開発環境
-  - フロントエンド React.js (Material-UI)
-  - バックエンド Express.js
-  - DB MySQL
-  - Dockerで開発
+  - React.js (Material-UI)
+  - Express.js
+  - MySQL
+  - Docker
   - GitHub Actionsで自動デプロイ
 
 - インフラ
   - フロントエンド  
     Cloud Front + S3 (+ Lambda@Edge)
   - サーバー  
-    ALB + ECS (+ ECR)
+    ALB + ECS + ECR
   - Route53 + ACMでHTTPS接続  
 
 - 認証  
