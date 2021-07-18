@@ -1,5 +1,5 @@
 # Audience
-映画、音楽、本、アニメから好きな作品と紐づけてレビューを投稿する、SNS風のWEBアプリです。CRUD機能と４つの外部API, Docker, AWSやAuth0などを試しました。  
+映画、音楽、本、アニメの中から好きな作品と紐づけてレビューを投稿する、SNS風のWEBアプリです。CRUD機能と4つの外部API, Docker, AWSやAuth0などを試しました。
 現在投稿されているレビューは開発時に用意したものです。
 
 ## 機能一覧
@@ -19,11 +19,11 @@ Express.js
 MySQL
 ### インフラ
 - Docker
-- フロント
-  Cloud Front + S3
-- サーバー
+- フロント  
+  Cloud Front + S3 (+ Lambda@Edge)
+- サーバー  
   ALB + ECS (+ ECR)
-- その他
+- その他  
   Route53 + ACMでHTTPS接続
   GitHub Actionsで自動デプロイ
 ### 認証
