@@ -6,24 +6,24 @@ var logger = require('morgan');
 var cors = require('cors');
 var mysql = require('mysql2');
 
-var accountRouter = require('./routes/account');
+// var accountRouter = require('./routes/account');
 var profileRouter = require('./routes/profile');
-var followRouter = require('./routes/follow');
-var unFollowRouter = require('./routes/unFollow');
-var reviewRouter = require('./routes/review');
-var deletePostRouter = require('./routes/deletePost');
+// var followRouter = require('./routes/follow');
+// var unFollowRouter = require('./routes/unFollow');
+// var reviewRouter = require('./routes/review');
+// var deletePostRouter = require('./routes/deletePost');
 var musicRouter = require('./routes/music');
 var postsRouter = require('./routes/posts');
 var myPostsRouter = require('./routes/myPosts');
-var workPostsRouter = require('./routes/workPosts');
-var averageRouter = require('./routes/average');
-var likeRouter = require('./routes/like');
-var unLikeRouter = require('./routes/unLike');
-var settingRouter = require('./routes/setting');
-var deleteRouter = require('./routes/delete');
-var iconRouter = require('./routes/icon');
-var favoritesRouter = require('./routes/favorites');
-var workRouter = require('./routes/work');
+// var workPostsRouter = require('./routes/workPosts');
+// var averageRouter = require('./routes/average');
+// var likeRouter = require('./routes/like');
+// var unLikeRouter = require('./routes/unLike');
+// var settingRouter = require('./routes/setting');
+// var deleteRouter = require('./routes/delete');
+// var iconRouter = require('./routes/icon');
+// var favoritesRouter = require('./routes/favorites');
+// var workRouter = require('./routes/work');
 // var workRankingRouter = require('./routes/workRanking');
 // var likeRankingRouter = require('./routes/likeRanking');
 // var userRankingRouter = require('./routes/userRanking');
@@ -43,23 +43,23 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/profile', profileRouter);
-app.use('/account', accountRouter);
-app.use('/follow', followRouter);
-app.use('/unFollow', unFollowRouter);
-app.use('/review', reviewRouter);
-app.use('/deletePost', deletePostRouter);
+// app.use('/account', accountRouter);
+// app.use('/follow', followRouter);
+// app.use('/unFollow', unFollowRouter);
+// app.use('/review', reviewRouter);
+// app.use('/deletePost', deletePostRouter);
 app.use('/music', musicRouter);
-app.use('/like', likeRouter);
-app.use('/unLike', unLikeRouter);
+// app.use('/like', likeRouter);
+// app.use('/unLike', unLikeRouter);
 app.use('/posts', postsRouter);
 app.use('/myPosts', myPostsRouter);
-app.use('/average', averageRouter);
-app.use('/workPosts', workPostsRouter);
-app.use('/favorites', favoritesRouter);
-app.use('/setting', settingRouter);
-app.use('/delete', deleteRouter);
-app.use('/icon', iconRouter);
-app.use('/work', workRouter);
+// app.use('/average', averageRouter);
+// app.use('/workPosts', workPostsRouter);
+// app.use('/favorites', favoritesRouter);
+// app.use('/setting', settingRouter);
+// app.use('/delete', deleteRouter);
+// app.use('/icon', iconRouter);
+// app.use('/work', workRouter);
 // app.use('/workRanking', workRankingRouter);
 // app.use('/likeRanking', likeRankingRouter);
 // app.use('/userRanking', userRankingRouter);
@@ -76,6 +76,10 @@ var pool = mysql.createPool({
 });
 
 global.pool = pool;
+
+app.get('/', function(req, res){
+  res.send('Audience API');
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
