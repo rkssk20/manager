@@ -27,15 +27,14 @@
     Cloud Front + S3 (+ Lambda@Edge)
   - サーバー  
     ALB + ECS (+ ECR)
-  - その他
   - Dockerで開発
   - Route53 + ACMでHTTPS接続  
   - GitHub Actionsで自動デプロイ
 
-- 認証
+- 認証  
   Auth0
 - 外部API
-- TMDb(映画情報の取得)
-- Spotify(音楽)
-- Google Books(本)
-- Annict(アニメ)
+  - TMDb(映画情報の取得)
+  - Spotify(音楽)
+  - Google Books(本)
+  - Annict(アニメ)
