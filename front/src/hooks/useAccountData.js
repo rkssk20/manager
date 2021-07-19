@@ -19,10 +19,7 @@ function useAccountData(userData, paramsId){
         headers : new Headers({ "Content-type" : "application/json" })
       })
       .then(response => response.json())
-      .then(result => {
-        console.log(result)
-        setAccountData(result[0]);
-      });
+      .then(result => setAccountData(result[0]));
     }
   }, [userData, paramsId]);
 
